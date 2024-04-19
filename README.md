@@ -8,11 +8,6 @@ or
 ```
 git clone https://github.com/mkozbial/Authentication_in_web_apps.git
 ```
-Go to app folder
-```
-cd .\my-app\ 
-```
-
 Open in editor if needed
 ```
 code .
@@ -33,6 +28,10 @@ npm install -g npm
 For the frontend app change branch to front-end
 ```
 git checkout front-end && git pull
+```
+Go to app folder
+```
+cd .\my-app\ 
 ```
 Run app locally
 ```
