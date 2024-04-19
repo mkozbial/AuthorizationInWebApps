@@ -1,0 +1,36 @@
+
+@font-face {
+  font-family: 'Montserrat';
+  src: local('Montserrat'), url(../../fonts/Montserrat-SemiBold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(../../fonts/Inconsolata_Expanded-Light.ttf) format('ttf');
+}
+
+
+.login-page {
+    height: 100vh;
+    width: 100%;
+    padding: 4em 1em;
+
+    &__content {
+        color: #3b3b3b;
+
+        font-family: "Inconsolata", sans-serif;
+        font-weight: 500;
+        
+        width: 30em;
+        height: 25em;
+        margin: 4em auto;
+        padding: 1em;
+
+        background-image: linear-gradient(0deg, white, white),
+        linear-gradient(0deg, #9f9eff, #807dfe);
+        background-clip: padding-box, border-box;
+        background-origin: border-box;
+        border: 4px solid transparent;
+        border-radius: 1.75rem;
+    }
+}

@@ -1,0 +1,105 @@
+
+
+@font-face {
+  font-family: 'Montserrat';
+  src: local('Montserrat'), url(../../fonts/Montserrat-SemiBold.ttf) format('ttf');
+}
+
+@font-face {
+  font-family: 'Inconsolata';
+  src: local('Inconsolata'), url(../../fonts/Inconsolata_Expanded-Light.ttf) format('ttf');
+}
+
+
+.register {
+    &__heading {
+        color: #6a68e9;
+        font-family: "Montserrat", sans-serif;
+        font-weight: 600;
+        margin: 1em 0 0 0;
+    }
+
+    &__content {
+        color: #3b3b3b;
+        font-family: "Inconsolata", sans-serif;
+        font-weight: 500;
+        background-color: #ffff;
+        width: 30em;
+        height: 25em;
+        margin: 4em auto;
+        padding: 1em;
+        display: flex;
+        background-image: linear-gradient(0deg, white, white),
+        linear-gradient(0deg, #9f9eff, #807dfe);
+        background-clip: padding-box, border-box;
+        background-origin: border-box;
+        border: 4px solid transparent;
+        border-radius: 1.75rem;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__inputs {
+        width: 100%;
+    }
+
+    &__label {
+        display: flex;
+        align-items: center;
+    }
+
+    &__input {
+        border: 2px solid #f5f5f5;
+        background-color: #f5f5f5;
+        height: 2.5em;
+        margin: 1em 0;
+        border-radius: 6px;
+        width: 100%;
+        padding: 0 1em;
+    }
+
+    input:focus {
+        outline: none;
+        border: 2px solid #746cfc;
+        border-color: #746cfc;
+        transition: border-color 0.4s ease;
+    }
+
+    ::placeholder {
+        color: #b4b4b4;
+        opacity: 1;
+        margin: 0 1em;
+    }
+
+    &__icon {
+        margin: 0 0.5em 0 0;
+    }
+
+    &__submit {
+        color: #ffff;
+        width: 30%;
+        height: 3em;
+        border: 2px transparent;
+        border-radius: 8px;
+        background: radial-gradient(ellipse at top left, #9493e2 0%, #746cfc 100%);
+
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 1px 4px #b4b4b4;
+        }
+
+        &:active {
+            border: 2px solid ;
+            border-color: #746cfc;
+            transition: border-color 0.4s ease;
+        }
+    }
+    
+}
