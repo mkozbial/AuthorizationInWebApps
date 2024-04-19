@@ -34,9 +34,9 @@ git checkout fron-end && git pull
 cd .\my-app\ 
 ```
 6. Install dependecies
-   ```
-   npm install
-   ```
+```
+npm install
+```
 7. Run app locally
 ```
 npm start
