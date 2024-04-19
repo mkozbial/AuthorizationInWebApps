@@ -1,5 +1,5 @@
 # Authentication_in_web_apps
-## How to run app localy
+## How to run app locally
 Clone this repo
 ```
 git clone git@github.com:mkozbial/Authentication_in_web_apps.git
