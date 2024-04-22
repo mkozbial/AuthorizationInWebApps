@@ -1,4 +1,4 @@
-.register {
+.login {
     $root: &;
 
     &__heading {
@@ -6,7 +6,7 @@
         font-family: 'Roboto Mono', monospace;
         font-weight: 100;
         margin: 1em 0 0 0;
-            text-align: center;
+        text-align: center;
     }
 
     &__description {
@@ -112,7 +112,7 @@
 
         &:focus {
             outline: none;
-            background-color: #8b60be;
+            background-color: #c453afbd;
             transition: background-color 0.6s ease;
         }
     }
@@ -133,7 +133,7 @@
         transition: background-color 0.4s ease;
         font-size: 14px;
         box-shadow: 1px 4px 10px #00000027;
-        margin: 1em 0 0 0 ;
+        margin-top: 5.4em;
 
         &:hover {
             cursor: pointer;

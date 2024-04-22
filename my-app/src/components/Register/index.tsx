@@ -4,7 +4,7 @@ import "./Register.scss";
 
 const Register: React.FC = () => {
     return (
-        <div>
+        <div className="register">
             <h2 className="register__heading">REGISTER</h2>
             <p className="register__description">Create your account</p>
             <form className="register__form"> 
