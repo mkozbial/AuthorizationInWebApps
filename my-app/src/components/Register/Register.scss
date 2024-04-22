@@ -1,27 +1,22 @@
-
-
-@font-face {
-  font-family: 'Montserrat';
-  src: local('Montserrat'), url(../../fonts/Montserrat-SemiBold.ttf) format('ttf');
-}
-
-@font-face {
-  font-family: 'Inconsolata';
-  src: local('Inconsolata'), url(../../fonts/Inconsolata_Expanded-Light.ttf) format('ttf');
-}
-
-
 .register {
+    $root: &;
+
     &__heading {
-        color: #6a68e9;
-        font-family: "Montserrat", sans-serif;
-        font-weight: 600;
+        color: white;
+        font-family: 'Roboto Mono', monospace;
+        font-weight: 100;
         margin: 1em 0 0 0;
+            text-align: center;
+    }
+
+    &__description {
+        font-family: 'Roboto Mono', monospace;
+        color: white;
+        text-align: center;
     }
 
     &__content {
-        color: #3b3b3b;
-        font-family: "Inconsolata", sans-serif;
+        font-family: 'Roboto Mono', monospace;
         font-weight: 500;
         background-color: #ffff;
         width: 30em;
@@ -53,30 +48,74 @@
     &__label {
         display: flex;
         align-items: center;
+        z-index: 0;
+        position: relative;
+
+        &--login {
+            &:before {
+                content: url("../../assets/icons/person.svg");
+                position: absolute;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                border: 2px solid;
+                border-color: white;
+                text-align: center;
+                border-radius: 3em;
+                width: 2em;
+                height: 2em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+        }
+
+        &--password {
+            &:before {
+                content: url("../../assets/icons/lock.svg");
+                position: absolute;
+                margin-left: auto;
+                margin-right: auto;
+                left: 0;
+                border: 2px solid;
+                border-color: white;
+                text-align: center;
+                border-radius: 3em;
+                width: 2em;
+                height: 2em;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+            }
+        }
+
     }
 
     &__input {
         border: 2px solid #f5f5f5;
-        background-color: #f5f5f5;
+        background-color: transparent;
         height: 2.5em;
         margin: 1em 0;
-        border-radius: 6px;
+        border-radius: 3em;
         width: 100%;
-        padding: 0 1em;
+        padding: 0 4em;
+        color: white;
+        font-family: 'Roboto Mono', monospace;
+
+        &::placeholder {
+            color: white;
+            margin: 0 1em;
+        }
+
+        &:focus {
+            outline: none;
+            background-color: #8b60be;
+            transition: background-color 0.6s ease;
+        }
     }
 
-    input:focus {
-        outline: none;
-        border: 2px solid #746cfc;
-        border-color: #746cfc;
-        transition: border-color 0.4s ease;
-    }
-
-    ::placeholder {
-        color: #b4b4b4;
-        opacity: 1;
-        margin: 0 1em;
-    }
 
     &__icon {
         margin: 0 0.5em 0 0;
@@ -88,17 +127,21 @@
         height: 3em;
         border: 2px transparent;
         border-radius: 8px;
-        background: radial-gradient(ellipse at top left, #9493e2 0%, #746cfc 100%);
+        background-color: #e6a95b;
+        font-family: 'Roboto Mono', monospace;
+        transition: background-color 0.4s ease;
+        font-size: 14px;
+        box-shadow: 1px 4px 10px #00000027;
 
         &:hover {
             cursor: pointer;
-            box-shadow: 0px 1px 4px #b4b4b4;
+            background-color: #d39b51;
+            transition: background-color 0.4s ease;
         }
 
         &:active {
-            border: 2px solid ;
-            border-color: #746cfc;
-            transition: border-color 0.4s ease;
+            background-color: #ce9040;
+            transition: background-color 0.4s ease;
         }
     }
     
