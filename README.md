@@ -1,4 +1,4 @@
-# Authentication_in_web_apps
+# Access control methods
 ## How to run app locally
 1. Clone this repo
 ```
