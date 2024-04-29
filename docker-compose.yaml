@@ -1,0 +1,20 @@
+services:
+  backend:
+    build: 
+      context: ./back
+      dockerfile: Dockerfile
+      target: base
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./back/src:/app/src
+      - ./back/nodemon.json:/app/nodemon.json
+    command: npm run dev
+  frontend:
+    build: ./front
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./front/src:/app/src
+    stdin_open: true
+    tty: true

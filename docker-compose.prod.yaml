@@ -1,0 +1,13 @@
+services:
+  backend:
+    build: 
+      target: production
+    command: npm start  #node dist/index.js
+  frontend:
+    build: ./front
+    ports:
+      - "3001:3000"
+    volumes:
+      - ./front/src:/app/src
+    stdin_open: true
+    tty: true
