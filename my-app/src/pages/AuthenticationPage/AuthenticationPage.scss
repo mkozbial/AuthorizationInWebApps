@@ -1,0 +1,81 @@
+.authetication-page {
+    $root: &;
+    height: 100vh;
+    width: 100%;
+    padding: 4em 1em;
+
+    &__content {
+        max-width: 30em;
+        height: 33em;
+        margin: 4em auto;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        border-radius: 1.75rem;
+
+        font-family: 'Roboto Mono', monospace;
+        color: white;
+
+        &--login {
+            background: linear-gradient(0deg, #c453af, #fb9a59);
+        }
+
+        &--register {
+            background: linear-gradient(0deg, #e079a6, #5c74ec);
+        }
+    }
+
+    &__divider {
+        height: 0.1em;
+        width: 90%;
+        background-color: white;
+        border-radius: 6em;
+        opacity: 0.5;
+        margin: 3em auto 1em;
+    }
+
+    &__switch {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__heading {
+        text-align: center;
+        font-size: 12px;
+        opacity: 0.7;
+    }
+
+    &__button {
+          border-color: #e6a95b;
+          border: 3px solid;
+          outline: none;
+          background: transparent;
+          text-decoration: none;
+          border-radius: 4em;
+
+          margin: 0.7em auto;
+          width: 6em;
+          height: 2.5em;
+
+          color: white;
+          font-family: 'Roboto Mono', monospace;
+          font-weight: 600;
+          font-size: 18px;
+          transition: border-color 0.4s ease;
+          opacity: 0.7;
+
+        &:hover {
+            cursor: pointer;
+            border-color: #f1bc76;
+            transition: border-color  0.4s ease;
+        }
+
+        &:active {
+            cursor: pointer;
+            border-color: #f7ad4d;
+            transition: border-color  0.4s ease;
+        }
+    }
+}
