@@ -18,10 +18,10 @@ node -v
 npm -v
 ```
 ![image](https://github.com/mkozbial/Authentication_in_web_apps/assets/121809496/122fb824-80dc-4b96-bb18-7080f7e0483f) \
-3.1. If not install node 
-#### Windows
-[For windows download here](https://nodejs.org/en/download 'Node for Windows').
-#### Linux
+3.1. If not install node  \
+3.1.1 Windows
+[For windows download here](https://nodejs.org/en/download 'Node for Windows'). \
+3.1.2 Linux
 ```
 npm install -g npm
 ```
