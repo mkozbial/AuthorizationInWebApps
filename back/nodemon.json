@@ -2,6 +2,7 @@
 
       "verbose" : true,
       "watch" : ["src/**/*.ts"],
+      "legacyWatch": true,
       "execMap" : {
             "ts" : "node --inspect=0.0.0.0:9929 --nolazy -r ts-node/register"
 
