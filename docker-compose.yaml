@@ -18,3 +18,13 @@ services:
       - ./front/src:/app/src
     stdin_open: true
     tty: true
+  database:
+    image: postgres:latest
+    container_name: database
+    restart: always
+    environment:
+      POSTGRES_DB: auth_database
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: WoPn4ss14Intel!#
+    ports:
+      - "5432:5432"

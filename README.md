@@ -89,3 +89,67 @@ Like in development, you can start the backend, frontend, or both in production 
   ```bash
   make prod
   ```
+
+### Database connection
+
+#### Installing PostgreSQL
+
+1. **Windows**
+   - Go to the official PostgreSQL website: [Download PostgreSQL](https://www.postgresql.org/download/).
+   - Choose the appropriate version for your operating system and download the installer.
+   - Run the installer and follow the instructions to install PostgreSQL.
+   - After the installation completes, ensure PostgreSQL has been successfully installed by running either the psql program or pgAdmin.
+   - **Note:** If you want to use `psql` in the Windows terminal, you need to set the environment variable for PostgreSQL bin directory. This can usually be done during the installation process or manually by updating the system's PATH variable.
+
+2. **Unix/Linux (Ubuntu):**
+   - Open a terminal.
+   - Execute the following commands to install PostgreSQL:
+     ```
+     sudo apt update
+     sudo apt install postgresql postgresql-contrib
+     ```
+   - After the installation completes, PostgreSQL will automatically start as a service.
+
+#### Running PostgreSQL
+```
+psql -U postgres 
+```
+Additionally, you can use pgAdmin4, a graphical user interface for PostgreSQL administration, which is included in PostgreSQL installations. 
+
+**Note:** When connecting to the PostgreSQL server for the first time, you may need to specify the following parameters: 
+  - Server: localhost
+  - Port: 5432
+  - Username: postgres
+  - Password: [your_password]
+
+
+#### Starting the Database
+
+1. **Create a Database:**
+``` 
+CREATE DATABASE secureauthdb
+```
+  To check if the database was created correctly, we can see if it is listed:
+```
+\l
+```
+2. **Begin Project Work:** \
+Run the script that creates the database located in the repository. You can use a terminal or the pgAdmin4 user panel to do this.
+- **Terminal**
+  ```
+  \i /path/to/file.sql
+  ```
+- **pg4Admin**
+  1. Add new query \
+  ![image](https://github.com/mkozbial/Authorization_in_web_apps/assets/121809496/a1a8d056-baf7-4075-b293-a36bfc5f9dd8)
+  2. Paste the file content and run
+  ![image](https://github.com/mkozbial/Authorization_in_web_apps/assets/121809496/f5689f38-02ae-441f-85da-0fa306b77cdb)
+
+3. **Connect to the Database:** 
+**Note** You need to have postgreSQL running (point "Running PostgreSQL")
+```
+\c secureauthdb
+```
+
+
+
