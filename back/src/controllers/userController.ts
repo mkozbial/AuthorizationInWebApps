@@ -1,4 +1,3 @@
-// backend/src/controllers/userController.ts
 import { Request, Response } from 'express';
 import { userService } from '../services/userService';
 

@@ -1,4 +1,3 @@
-// backend/src/services/userService.ts
 import { pool } from '../config';
 import { User } from '../models/User';
 

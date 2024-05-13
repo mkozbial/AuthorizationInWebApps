@@ -1,4 +1,3 @@
-// backend/src/controllers/authController.ts
 import { Request, Response } from 'express';
 import { userService } from '../services/userService';
 import bcryptjs from 'bcryptjs';
