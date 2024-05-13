@@ -4,7 +4,6 @@ import { User } from '../models/User';
 
 export const userService = {
    async createUser(username: string, password: string) {
-    console.log("userService");
     const result = await pool.query('INSERT INTO users (username, password, user_type) VALUES ($1, $2, $3) RETURNING *', [username, password, 'user']);
     return result.rows[0];
     },
