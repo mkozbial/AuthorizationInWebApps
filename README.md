@@ -1,13 +1,14 @@
 # Project setup
 
-Make sure Docker is installed and running on your system before executing any Docker commands. https://docs.docker.com/get-docker/
+Make sure Docker is installed and running on your system before executing any Docker commands. https://docs.docker.com/get-docker/.
+
 
 ## Development Environment Setup
 
 For setting up the development environment, you will use Docker Compose to build and manage your services. You have options to start the backend, frontend, or both simultaneously. Here's how you can do it:
 
 ### Building Services
-
+Before running the whole build, you need to set environment variables in .env, its structe can be checked in .env-example file.
 To build all the services necessary for the development environment, run the following command in your terminal:
 
 ```bash
