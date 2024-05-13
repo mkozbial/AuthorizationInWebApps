@@ -11,5 +11,10 @@ export const userService = {
   async getUserById(userId: number): Promise<User> {
     const result = await pool.query('SELECT * FROM users WHERE user_id = $1', [userId]);
     return result.rows[0];
+  },
+
+  async getUserByUsername(username: string): Promise<User> {
+    const result = await pool.query('SELECT * FROM users WHERE username = $1', [username]);
+    return result.rows[0];
   }
 };
