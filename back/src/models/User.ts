@@ -3,4 +3,4 @@ export interface User {
     username: string;
     password: string;
     user_type: 'admin' | 'user' | 'editor';
-  }
+}

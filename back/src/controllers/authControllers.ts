@@ -1,13 +1,17 @@
 import { Request, Response } from 'express';
 import { userService } from '../services/userService';
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
+
+const jwtSecret = process.env.JWT_SECRET;
 
 export const register = async (req: Request, res: Response) => {
   const { username, password } = req.body;
+
   try {
     const hashedPassword = await bcryptjs.hash(password, 10);
-    const user = await userService.createUser(username, hashedPassword);
+    const user = await userService.createUser(username, hashedPassword);  
     res.status(201).json({ message: 'User registered successfully!', user });
   } catch (error) {
     console.error('Error during registration:', error);
@@ -17,6 +21,7 @@ export const register = async (req: Request, res: Response) => {
 
 export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
+
   try {
     const user = await userService.getUserByUsername(username);
     if (!user) {
@@ -27,8 +32,19 @@ export const login = async (req: Request, res: Response) => {
     if (!passwordMatch) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
+
+    // Generate JWT token
+    if (!jwtSecret){
+      return res.status(401).json({ message: 'Invalid credentials' });
+      
+    }
+      
+    const token = jwt.sign({ userId: user.user_id }, jwtSecret, { expiresIn: '1h' });
+
+    // Send JWT token in response
+    res.status(200).json({ message: 'Login successful', token });
     
-    res.status(200).json({ message: 'Login successful', user });
+    //res.status(200).json({ message: 'Login successful', user });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Error during login' });
