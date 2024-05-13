@@ -7,9 +7,20 @@ Make sure Docker is installed and running on your system before executing any Do
 
 For setting up the development environment, you will use Docker Compose to build and manage your services. You have options to start the backend, frontend, or both simultaneously. Here's how you can do it:
 
+
+### Required .env file
+Before running the whole build, you need to set environment variables in *.env* as presented in *.env-example* file.
+
+#### Generating JWT Secret
+```
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+
+```
+Now you can copy the result and paste into the .env file.
+
 ### Building Services
-Before running the whole build, you need to set environment variables in .env, its structe can be checked in .env-example file.
 To build all the services necessary for the development environment, run the following command in your terminal:
+
 
 ```bash
 docker-compose build
@@ -111,46 +122,37 @@ Like in development, you can start the backend, frontend, or both in production 
      ```
    - After the installation completes, PostgreSQL will automatically start as a service.
 
-#### Running PostgreSQL
+#### PostgreSQL setup
 ```
 psql -U postgres 
 ```
-Additionally, you can use pgAdmin4, a graphical user interface for PostgreSQL administration, which is included in PostgreSQL installations. 
+The whole setup is managed by the **docker compose**, all you have to do is fill the example create your **.env** file basing of the given example.
 
-**Note:** When connecting to the PostgreSQL server for the first time, you may need to specify the following parameters: 
-  - Server: localhost
-  - Port: 5432
-  - Username: postgres
-  - Password: [your_password]
+**Note:** When you want to develop locally the host should be named as the database container name. 
 
 
 #### Starting the Database
 
-1. **Create a Database:**
-``` 
-CREATE DATABASE secureauthdb
-```
-  To check if the database was created correctly, we can see if it is listed:
-```
-\l
-```
-2. **Begin Project Work:** \
-Run the script that creates the database located in the repository. You can use a terminal or the pgAdmin4 user panel to do this.
-- **Terminal**
-  ```
-  \i /path/to/file.sql
-  ```
-- **pg4Admin**
-  1. Add new query \
-  ![image](https://github.com/mkozbial/Authorization_in_web_apps/assets/121809496/a1a8d056-baf7-4075-b293-a36bfc5f9dd8)
-  2. Paste the file content and run
-  ![image](https://github.com/mkozbial/Authorization_in_web_apps/assets/121809496/f5689f38-02ae-441f-85da-0fa306b77cdb)
+1. **Setup:**
+After running the docker-compose and make command, you can enter the database container in order to setup the DB.
 
-3. **Connect to the Database:** 
-**Note** You need to have postgreSQL running (point "Running PostgreSQL")
 ```
-\c secureauthdb
+pqsl -U <username>
 ```
+
+2. **Connect to DB:**
+```
+\c <database-name>
+```
+3. **Begin Project Work:** 
+
+Run the database's structure initialization.
+
+```
+\i /path/to/file.sql
+```
+
+
 
 
 
