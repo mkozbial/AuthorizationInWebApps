@@ -6,13 +6,13 @@
 
     &__content {
         max-width: 30em;
-        height: 33em;
+        height: 34em;
         margin: 4em auto;
         padding: 1em;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-
+        position: relative;
         border-radius: 1.75rem;
 
         font-family: 'Roboto Mono', monospace;
