@@ -1,4 +1,3 @@
-// backend/src/routes/authRoutes.ts
 import express from 'express';
 import { register, login } from '../controllers/authControllers';
 

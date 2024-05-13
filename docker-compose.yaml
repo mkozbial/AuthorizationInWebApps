@@ -1,6 +1,6 @@
 services:
   backend:
-    build: 
+    build:
       context: ./back
       dockerfile: Dockerfile
       target: base
@@ -9,7 +9,13 @@ services:
     volumes:
       - ./back/src:/app/src
       - ./back/nodemon.json:/app/nodemon.json
+    env_file:
+      - .env
     command: npm run dev
+    depends_on:
+      - database
+    networks:
+      - mynetwork
   frontend:
     build: ./front
     ports:
@@ -18,6 +24,8 @@ services:
       - ./front/src:/app/src
     stdin_open: true
     tty: true
+    networks:
+      - mynetwork
   database:
     image: postgres:latest
     container_name: database
@@ -26,14 +34,11 @@ services:
       POSTGRES_DB: auth_database
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: WoPn4ss14Intel!#
+    volumes:
+      - ./database-configuration.sql:/database-configuration.sql
     ports:
       - "5432:5432"
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    restart: always
-    ports:
-      - "5050:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: your_email@example.com
-      PGADMIN_DEFAULT_PASSWORD: your_password
+    networks:
+      - mynetwork
+networks:
+  mynetwork:
