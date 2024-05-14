@@ -35,7 +35,7 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: WoPn4ss14Intel!#
     volumes:
-      - ./database-configuration.sql:/database-configuration.sql
+      - ./database-configuration.sql:/docker-entrypoint-initdb.d/database-configuration.sql
     ports:
       - "5432:5432"
     networks:
