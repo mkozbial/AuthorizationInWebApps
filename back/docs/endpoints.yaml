@@ -1,0 +1,60 @@
+endpoints:
+  - path: /auth/register
+      method: POST
+      description: Register user
+      parameters: []
+      payload:
+        contentType: application/json
+        data:
+          username: example_user
+          password: securepassword
+
+  - path: /auth/login
+      method: POST
+      description: Login user
+      parameters: []
+      payload:
+        contentType: application/json
+        data:
+          username: example_user
+          password: securepassword
+
+
+  - path: /auth/token
+      method: POST
+      description: Retrieve user associated with given token
+      parameters: []
+      headers:
+        Authorization: Bearer token
+
+  - path: /users/{id}
+    method: GET
+    description: Get user by ID
+    parameters:
+      - name: id
+        type: string
+        description: User ID
+    headers:
+      Authorization: Bearer token
+
+  - path: /admin/users
+    method: GET
+    description: Get all users
+    headers:
+      Authorization: Bearer token
+
+  - path: /admin/users/{id}
+    method: POST
+    description: Modifies the given user
+    parameters:
+      - name: id
+        type: string
+        description: User ID
+    payload:
+        contentType: application/json
+        data:
+          user_type: user
+    headers:
+      Authorization: Bearer token
+  
+  
