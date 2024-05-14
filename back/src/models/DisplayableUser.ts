@@ -1,6 +1,5 @@
-export interface User {
+export interface DisplayableUser {
       user_id: number;
       username: string;
-      password: string;
       user_type: 'admin' | 'user' | 'editor';
-}
+  }

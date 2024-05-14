@@ -131,26 +131,15 @@ The whole setup is managed by the **docker compose**, all you have to do is fill
 **Note:** When you want to develop locally the host should be named as the database container name. 
 
 
-#### Starting the Database
+#### Creating super user
 
-1. **Setup:**
-After running the docker-compose and make command, you can enter the database container in order to setup the DB.
+1. **Enter the backend terminal**
 
+2. **Run following script**
 ```
-pqsl -U <username>
+node createsuperuser.js
 ```
 
-2. **Connect to DB:**
-```
-\c <database-name>
-```
-3. **Begin Project Work:** 
-
-Run the database's structure initialization.
-
-```
-\i /path/to/file.sql
-```
 
 
 
