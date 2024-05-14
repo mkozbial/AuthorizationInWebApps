@@ -1,8 +1,5 @@
 import { Request, Response } from 'express';
 import { adminService } from '../services/adminService';
-import bcryptjs from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-import { jwtSecret } from '../config';
 import {
 	StatusCodes,
 } from 'http-status-codes';
