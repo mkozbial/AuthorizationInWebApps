@@ -2,6 +2,7 @@
 import express from 'express';
 import { authRouter } from '../src/routes/authRoutes';
 import { userRouter } from '../src/routes/userRoutes';
+import { adminRouter } from '../src/routes/adminRoutes';
 import bodyParser from 'body-parser';
 
 const cors = require('cors');
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 
 app.use('/auth', authRouter);
 app.use('/users', userRouter);
+app.use('/admin', adminRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running at http://localhost:${PORT}`);

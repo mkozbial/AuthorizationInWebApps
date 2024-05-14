@@ -1,11 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
+import { jwtSecret } from '../config';
 import {
 	StatusCodes,
 } from 'http-status-codes';
-
-
-const jwtSecret = process.env.JWT_SECRET;
 
 export const verifyToken = (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(' ')[1];

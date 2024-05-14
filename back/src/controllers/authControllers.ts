@@ -2,12 +2,10 @@ import { Request, Response } from 'express';
 import { userService } from '../services/userService';
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import { jwtSecret } from '../config';
 import {
 	StatusCodes,
 } from 'http-status-codes';
-
-
-const jwtSecret = process.env.JWT_SECRET;
 
 export const register = async (req: Request, res: Response) => {
   const { username, password } = req.body;

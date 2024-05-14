@@ -5,6 +5,8 @@ dotenv.config();
 
 //console.log(process.env)
 
+export const jwtSecret = process.env.JWT_SECRET;
+
 export const pool = new Pool({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
