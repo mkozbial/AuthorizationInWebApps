@@ -1,16 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.scss";
-import useAuth from "../../hooks/useAuth.tsx";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
     const [userType, setUserType] = useState("");
     const [password, setPassword] = useState("");
     const [login, setLogin] = useState("");
-    const { setAuth } = useAuth();
     const navigate = useNavigate();
-    // const location = useLocation();
-    // const from = location.state?.from?.pathname || "/";
+
+    useEffect(() => {
+        const accessToken = localStorage.getItem('accessToken');
+
+        if (accessToken) {
+        localStorage.removeItem('accessToken');
+        }
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -24,17 +29,16 @@ const Login: React.FC = () => {
                 password: password,
             }),
         })
-         .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
         })
         .then(data => {
             const { token, user } = data;
-
-            setAuth({ username: user.username, password: user.password, role: user.user_type, accessToken: token});
-            localStorage.setItem('AccessToken', token);
+            console.log(data);
+            localStorage.setItem('accessToken', token);
             //navigate(from, { replace: true });
             navigate('/main');
         })
