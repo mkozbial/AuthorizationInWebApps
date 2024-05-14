@@ -10,10 +10,10 @@ export const getAllPosts = async (req: Request, res: Response) => {
     try {
         const posts = await postService.getAllPosts();
         res.status(StatusCodes.OK).json(posts);
-      } catch (error) {
+    } catch (error) {
         console.error('Error fetching posts:', error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching posts' });
-      }      
+    }      
 
 };
 
@@ -32,23 +32,24 @@ export const getUserAndPublicPosts = async (req: Request, res: Response) => {
 export const uploadPost = async(req: Request, res: Response) => {
 
     const { title, content, visibility, user_id } = req.body;
-  try {
-    const post = await postService.createPost(title, content, visibility, user_id);
-    res.status(StatusCodes.CREATED).json({ message: 'Post uploaded successfully!', post });
-  } catch (error) {
-    console.error('Error uploading post:', error);
-    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error uploading post' });
-  }
+    try {
+        const post = await postService.createPost(title, content, visibility, user_id);
+        res.status(StatusCodes.CREATED).json({ message: 'Post uploaded successfully!', post });
+    } catch (error) {
+        console.error('Error uploading post:', error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error uploading post' });
+    }
 };
 
-export const deletePost = (req: Request, res: Response) => {
-
-
-      const id = req.body.id;
-
-      // TODO : DELETION PROCESS
-
-      res.json({"status" :  404});
+export const deletePost = async (req: Request, res: Response) => {
+    const postId = req.body.id;
+    try {
+      await postService.deletePost(postId);
+      res.status(StatusCodes.OK).json({ message: 'Post deleted successfully!' });
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error deleting post' });
+    }
 };
 
 

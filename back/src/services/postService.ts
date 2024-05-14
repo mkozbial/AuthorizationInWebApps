@@ -23,5 +23,9 @@ export const postService = {
         );
         return result.rows[0];
     },
+    
+    async deletePost(postId: number): Promise<void> {
+        await pool.query('DELETE FROM posts WHERE post_id = $1', [postId]);
+    },
 
 };
