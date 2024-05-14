@@ -23,7 +23,6 @@ export const allUsers = async (req: Request, res: Response) => {
 export const modifyUser = async (req: Request, res: Response) => {
       const userId = parseInt(req.params.id, 10);
       const { user_type } = req.body;
-      console.log(user_type);
 
       if (!user_type) {
             res.status(StatusCodes.BAD_REQUEST).json({ message: 'Invalid request' });
@@ -31,12 +30,10 @@ export const modifyUser = async (req: Request, res: Response) => {
 
       try {
             const user = await adminService.modifyUser(userId, user_type);
-            res.status(StatusCodes.OK).json(user);
+
+            res.status(StatusCodes.OK).json({ message: 'Data succesfully changed', data: user});
       } catch (error) {
             console.error('Error fetching user:', error);
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching user' });
       }
-      const { username } = req.body;
-
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Data succesfully changed' });
 };

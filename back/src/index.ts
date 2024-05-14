@@ -10,7 +10,7 @@ const app = express();
 const PORT = 8080;
 
 app.get('/', (req, res) => {
-  res.send('Hello World from backend!');
+      res.send('Hello World from backend!');
 });
 
 app.use(cors());
@@ -22,5 +22,5 @@ app.use('/users', userRouter);
 app.use('/admin', adminRouter);
 
 app.listen(PORT, () => {
-  console.log(`Server is running at http://localhost:${PORT}`);
+      console.log(`Server is running at http://localhost:${PORT}`);
 });
