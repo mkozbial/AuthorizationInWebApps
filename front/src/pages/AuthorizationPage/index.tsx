@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./AuthenticationPage.scss";
+import "./AuthorizationPage.scss";
 import Register from "../../components/Register/index.tsx";
 import Login from "../../components/Login/index.tsx";
 
-const AuthenticationPage: React.FC = () => {
+const Authorization: React.FC = () => {
     const [displayedView, setDisplayedView] = useState("login");
     const heading = displayedView === "login" ? "Not a member?" : "Already have an account?";
     const btnText = displayedView === "login" ? "Register" : "LOGIN";
@@ -19,7 +19,7 @@ const AuthenticationPage: React.FC = () => {
         <div className="authetication-page">
             <div className={`authetication-page__content authetication-page__content--${displayedView}`}>
                 {displayedView === "login" ? (
-                    <Login />
+                    <Login/>
                 ): (
                     <Register />
                 )}
@@ -34,4 +34,4 @@ const AuthenticationPage: React.FC = () => {
     );
 };
 
-export default AuthenticationPage;
+export default Authorization;
