@@ -1,10 +1,11 @@
 import express from 'express';
-import { deletePost, editPost, getAllPosts, uploadPost } from '../controllers/postController';
+import { verifyToken } from '../middleware/verifyToken';
+import { deletePost, editPost, getUserAndPublicPosts, uploadPost } from '../controllers/postController';
 
 export const postRouter = express.Router();
 
 
-postRouter.get('/', getAllPosts);
-postRouter.post('/upload', uploadPost);
-postRouter.delete('/delete', deletePost);
-postRouter.put('/edit', editPost);
+postRouter.get('/', verifyToken, getUserAndPublicPosts);
+postRouter.post('/upload', verifyToken, uploadPost);
+postRouter.delete('/delete', verifyToken, deletePost);
+postRouter.put('/edit', verifyToken, editPost);

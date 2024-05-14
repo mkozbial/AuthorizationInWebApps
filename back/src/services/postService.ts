@@ -45,4 +45,9 @@ export const postService = {
         await pool.query(query, values);
       },
 
+    async getPostById(postId: number): Promise<Post | null> {
+        const result = await pool.query('SELECT * FROM posts WHERE post_id = $1', [postId]);
+        return result.rows[0] || null;
+    }
+
 };
