@@ -8,42 +8,29 @@ import {
 } from 'http-status-codes';
 
 export const allUsers = async (req: Request, res: Response) => {
+      try {
+            const users = await adminService.getUsers();
 
-      const { user } = req.body;
+            res.status(StatusCodes.OK).json({ message: 'Data succesfully received', data : users });
 
-      const users = await adminService.getUsers();
-      console.log(users)
+      } catch (error) {
+            console.error('Error fetching users:', error);
 
-      //const user  = userService.getUserById(1);
-    
-      // try {
-      //   const user = await userService.getUserByUsername(username);
-      //   if (!user) {
-      //     return res.status(StatusCodes.NOT_FOUND).json({ message: 'User not found' });
-      //   }
-        
-      //   const passwordMatch = await bcryptjs.compare(password, user.password);
-      //   if (!passwordMatch) {
-      //     return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Invalid credentials' });
-      //   }
-    
-      //   if (!jwtSecret){
-      //     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Server secret is not set' });
-          
-      //   }
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching users' });
+      }
+};
 
-      //   if (user.user_type != "admin"){
-      //       return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'These are not admin credentials' });
-      //   }
-            
-      //   const token = jwt.sign({ userId: user.user_id }, jwtSecret, { expiresIn: '1h' });
-    
-      //   res.status(StatusCodes.ACCEPTED).json({ message: 'Login successful', token, user });
-    
-      // } catch (error) {
-      //   console.error('Error during login:', error);
-      //   res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error during login' });
-      // }
+export const modifyUser = async (req: Request, res: Response) => {
+      const userId = parseInt(req.params.id, 10);
+      const { user_type } = req.body;
+      try {
+            const user = await adminService.modifyUser(userId, user_type);
+            res.status(StatusCodes.OK).json(user);
+      } catch (error) {
+            console.error('Error fetching user:', error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching user' });
+      }
+      const { username } = req.body;
 
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Monkey' });
-    };
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Data succesfully changed' });
+};

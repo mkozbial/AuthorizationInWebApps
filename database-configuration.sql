@@ -1,5 +1,3 @@
--- CREATE DATABASE auth_database;
-
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
     username VARCHAR(100) NOT NULL,
@@ -17,3 +15,5 @@ CREATE TABLE photos (
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
 
+INSERT INTO users (username, password, user_type)
+VALUES ('admin', 'admin', 'admin');
