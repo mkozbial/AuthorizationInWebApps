@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.scss";
 
-const Login: React.FC = () => {
+const Login: React.FC<AuthorizationProps> = ({ setUser }) => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [login, setLogin] = useState(false);
+    
     return (
         <div className="login">
             <h2 className="login__heading">LOGIN</h2>

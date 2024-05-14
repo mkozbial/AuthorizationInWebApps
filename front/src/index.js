@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AuthenticationPage from "./pages/AuthenticationPage/index.tsx";
+import App from './pages/index.tsx';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AuthenticationPage />
+    <App />
   </React.StrictMode>
 );
 

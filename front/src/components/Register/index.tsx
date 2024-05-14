@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import * as Tooltip from '@radix-ui/react-tooltip';
 import "./Register.scss";
 
@@ -18,14 +17,30 @@ const Register: React.FC = () => {
             return;
         }
         
-        const configuration = {
-            method: "post",
-            url: "localhost:8080/auth/register",
-            data: {
-                login,
-                password
+        fetch('http://localhost:8080/auth/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: login,
+                password: password,
+                user_type: 'user',
+            }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
             }
-        };
+            return response.json();
+        })
+        .then(data => {
+            // localStorage.setItem('jwtToken', data.token);
+            console.log('Registration successful:', data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the registration:', error);
+        });
     }
     const validatePassword = (password) => {
         let message = ""
