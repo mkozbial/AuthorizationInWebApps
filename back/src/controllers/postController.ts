@@ -1,25 +1,44 @@
 import { Request, Response } from 'express';
+import { postService } from '../services/postService';
 import { Post } from '../models/Post';
+import {
+	StatusCodes,
+} from 'http-status-codes';
 
-export const getAllPosts = (req: Request, res: Response) => {
+export const getAllPosts = async (req: Request, res: Response) => {
 
-      const posts = [
-            { id: 1, title: 'Post 1', content: 'content of Post 1!!!!', visibility: 'private' },
-            { id: 2, title: 'Post 2', content: 'content of Post 2!!!!', visibility: 'public'},
-            { id: 3, title: 'Post 3', content: 'content of Post 3!!!!', visibility: 'public' },
-      ];
+    try {
+        const posts = await postService.getAllPosts();
+        res.status(StatusCodes.OK).json(posts);
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching posts' });
+      }      
 
-      // TODO : DB QUERY
-
-      res.json(posts);
 };
 
+export const getUserAndPublicPosts = async (req: Request, res: Response) => {
+    const userId = parseInt(req.query.user_id as string, 10);
+    try {
+      const posts = await postService.getUserAndPublicPosts(userId);
+      res.status(StatusCodes.OK).json(posts);
+    } catch (error) {
+      console.error('Error fetching user and public posts:', error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching user and public posts' });
+    }
+  };
 
-export const uploadPost = (req: Request, res: Response) => {
 
-      // TODO : SAVING PROCESS
+export const uploadPost = async(req: Request, res: Response) => {
 
-      res.json({"status" :  403});
+    const { title, content, visibility, user_id } = req.body;
+  try {
+    const post = await postService.createPost(title, content, visibility, user_id);
+    res.status(StatusCodes.CREATED).json({ message: 'Post uploaded successfully!', post });
+  } catch (error) {
+    console.error('Error uploading post:', error);
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error uploading post' });
+  }
 };
 
 export const deletePost = (req: Request, res: Response) => {
