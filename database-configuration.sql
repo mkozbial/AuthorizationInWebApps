@@ -14,6 +14,3 @@ CREATE TABLE photos (
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
 );
-
-INSERT INTO users (username, password, user_type)
-VALUES ('admin', 'admin', 'admin');

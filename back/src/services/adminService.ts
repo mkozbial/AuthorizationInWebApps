@@ -7,20 +7,15 @@ export const adminService = {
     return result.rows;
   },
   async modifyUser(user_id : number, new_user_type : string) {
-      const query = {
-            text: `UPDATE users
-                  SET user_type = $1
-                  WHERE user_id = $2`,
-            values: [new_user_type, user_id],
-          };
-          
-      pool.query(query)
-      
+      pool.query(`UPDATE users SET user_type = $1 WHERE user_id = $2`, [new_user_type, user_id])
       .then(() => {
             console.log('User updated successfully');
       })
       .catch((err) => {
             throw err;
       });
+
+      const result = await pool.query('SELECT user_id, username, user_type FROM users WHERE user_id = $1', [user_id]);
+      return result.rows[0];
     },
 };

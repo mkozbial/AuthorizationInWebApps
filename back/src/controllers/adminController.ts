@@ -23,6 +23,12 @@ export const allUsers = async (req: Request, res: Response) => {
 export const modifyUser = async (req: Request, res: Response) => {
       const userId = parseInt(req.params.id, 10);
       const { user_type } = req.body;
+      console.log(user_type);
+
+      if (!user_type) {
+            res.status(StatusCodes.BAD_REQUEST).json({ message: 'Invalid request' });
+      }
+
       try {
             const user = await adminService.modifyUser(userId, user_type);
             res.status(StatusCodes.OK).json(user);
