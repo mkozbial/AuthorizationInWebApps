@@ -8,6 +8,7 @@ const Register: React.FC = () => {
     const [repPassword, setRepPassword] = useState("");
     const [validPassword, setValidPassword] = useState(true);
     const [validMessage, setValidMessage] = useState("");
+    const [registered, setRegistered] = useState(false)
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -28,15 +29,9 @@ const Register: React.FC = () => {
                 user_type: 'user',
             }),
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            return response.json();
-        })
         .then(data => {
             // localStorage.setItem('jwtToken', data.token);
-            console.log('Registration successful:', data);
+            setRegistered(true);
         })
         .catch(error => {
             console.error('There was a problem with the registration:', error);
@@ -85,7 +80,7 @@ const Register: React.FC = () => {
                             className="register__input register__input--login"
                             placeholder="Username"
                             value={login}
-                            onChange={(e) => setLogin(e.target.value)}
+                            onChange={(e) => { setLogin(e.target.value); setRegistered(false);}}
                         />
                     </label>
                     <label className="register__label register__label--password">
@@ -95,7 +90,7 @@ const Register: React.FC = () => {
                             className="register__input"
                             placeholder="Password"
                             value={password}
-                            onChange={(e) => {setPassword(e.target.value); setValidPassword(true);}}
+                            onChange={(e) => {setPassword(e.target.value); setValidPassword(true); setRegistered(false);}}
                         />
                     </label>
                     <label className="register__label register__label--password">
@@ -105,7 +100,7 @@ const Register: React.FC = () => {
                             className="register__input"
                             placeholder="Repeat password"
                             value={repPassword}
-                            onChange={(e) => { setRepPassword(e.target.value); setValidPassword(true);}}
+                            onChange={(e) => { setRepPassword(e.target.value); setValidPassword(true); setRegistered(false);}}
                         />
                     </label>
                     {password !== repPassword && <p>Passwords don't match</p>}
@@ -138,6 +133,7 @@ const Register: React.FC = () => {
                 >
                     Sign me up
                 </button>
+                {registered && <p>Successfully Registered! You can now log in</p>}
             </form>
         </div>
     );

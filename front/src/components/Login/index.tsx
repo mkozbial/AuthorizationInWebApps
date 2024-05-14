@@ -1,10 +1,47 @@
 import React, { useState } from "react";
 import "./Login.scss";
+import useAuth from "../../hooks/useAuth.tsx";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const Login: React.FC<AuthorizationProps> = ({ setUser }) => {
-    const [email, setEmail] = useState("");
+const Login: React.FC = () => {
+    const [userType, setUserType] = useState("");
     const [password, setPassword] = useState("");
-    const [login, setLogin] = useState(false);
+    const [login, setLogin] = useState("");
+    const { setAuth } = useAuth();
+    const navigate = useNavigate();
+    // const location = useLocation();
+    // const from = location.state?.from?.pathname || "/";
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+         fetch('http://localhost:8080/auth/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: login,
+                password: password,
+            }),
+        })
+         .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+        })
+        .then(data => {
+            const { token, user } = data;
+
+            setAuth({ username: user.username, password: user.password, role: user.user_type, accessToken: token});
+            localStorage.setItem('AccessToken', token);
+            //navigate(from, { replace: true });
+            navigate('/main');
+        })
+        .catch(error => {
+            console.error('There was a problem with the login:', error);
+        });
+    }
     
     return (
         <div className="login">
@@ -13,14 +50,35 @@ const Login: React.FC<AuthorizationProps> = ({ setUser }) => {
             <form className="login__form"> 
                 <div className="login__inputs">
                     <label className="login__label login__label--login">
-                        <input type="text" name="login" className="login__input login__input--login" placeholder="Username"/>
+                        <input
+                            type="text"
+                            name="login"
+                            className="login__input login__input--login"
+                            placeholder="Username"
+                            value={login}
+                            onChange={(e) => {setLogin(e.target.value)}}
+                        />
                     </label>
                     <label className="login__label login__label--password">
-                        <input type="text" name="password" className="login__input" placeholder="Password" />
+                        <input
+                            type="password"
+                            name="password"
+                            className="login__input"
+                            placeholder="Password"
+                            value={password}
+                            onChange={(e) => {setPassword(e.target.value)}}
+                        />
                     </label>
                 </div>   
-                <button type="submit" className="login__submit" name="submit" value="Sign me up">Log in</button>
-                    
+                <button
+                    type="submit"
+                    className="login__submit"
+                    name="submit"
+                    value="Sign me up"
+                    onClick={(e) => {handleSubmit(e)}}
+                >
+                    Log in
+                </button>
             </form>
         </div>
     );
