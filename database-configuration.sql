@@ -6,10 +6,10 @@ CREATE TABLE users (
     UNIQUE (username)
 );
 
-CREATE TABLE photos (
-    photo_id SERIAL PRIMARY KEY,
-    filename VARCHAR(255) NOT NULL,
-    filepath VARCHAR(255) NOT NULL,
+CREATE TABLE posts (
+    post_id SERIAL PRIMARY KEY,
+    title VARCHAR(255) NOT NULL,
+    content TEXT NOT NULL,
     visibility VARCHAR(10) CHECK (visibility IN ('private', 'public')) NOT NULL,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id)
