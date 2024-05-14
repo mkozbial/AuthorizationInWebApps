@@ -28,4 +28,21 @@ export const postService = {
         await pool.query('DELETE FROM posts WHERE post_id = $1', [postId]);
     },
 
+    async editPost(postId: number, updatedFields: { title?: string; content?: string; visibility?: string }): Promise<void> {
+        const setClauses: string[] = [];
+        const values = [];
+        let query = 'UPDATE posts SET ';
+    
+        Object.keys(updatedFields).forEach((field, index) => {
+          setClauses.push(`${field} = $${index + 1}`);
+          values.push((updatedFields as any)[field]);
+        });
+    
+        query += setClauses.join(', ');
+        query += ' WHERE post_id = $' + (values.length + 1);
+        values.push(postId);
+    
+        await pool.query(query, values);
+      },
+
 };

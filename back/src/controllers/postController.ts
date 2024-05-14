@@ -53,12 +53,24 @@ export const deletePost = async (req: Request, res: Response) => {
 };
 
 
-export const editPost = (req: Request, res: Response) => {
-
-
-      const id = req.body.id;
-
-      // TODO : EDITION PROCESS
-
-      res.json({"status" :  404});
+export const editPost = async (req: Request, res: Response) => {
+    const postId = req.body.id;
+    const { title, content, visibility } = req.body;
+  
+    try {
+      const updatedFields: any = {};
+      if (title) updatedFields.title = title;
+      if (content) updatedFields.content = content;
+      if (visibility) updatedFields.visibility = visibility;
+  
+      if (Object.keys(updatedFields).length === 0) {
+        return res.status(StatusCodes.BAD_REQUEST).json({ message: 'No fields to update' });
+      }
+  
+      await postService.editPost(postId, updatedFields);
+      res.status(StatusCodes.OK).json({ message: 'Post edited successfully!' });
+    } catch (error) {
+      console.error('Error editing post:', error);
+      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error editing post' });
+    }
 };
