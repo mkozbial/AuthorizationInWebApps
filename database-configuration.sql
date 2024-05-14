@@ -1,4 +1,4 @@
-CREATE DATABASE auth_database;
+-- CREATE DATABASE auth_database;
 
 CREATE TABLE users (
     user_id SERIAL PRIMARY KEY,
