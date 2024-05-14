@@ -50,9 +50,18 @@ export const login = async (req: Request, res: Response) => {
 };
 
 export const retriveUser = async (req: Request, res: Response) => {
-	try {
 
-		res.status(StatusCodes.ACCEPTED).json({ message: ''});
+	const { user } = req.body;
+
+	if (!user) {
+            res.status(StatusCodes.BAD_REQUEST).json({ message: 'Invalid request' });
+      }
+
+	console.log(user);
+
+	try {
+		const result = await userService.getUserById(user.userId);
+            res.status(StatusCodes.OK).json({ message: 'Succesfully received data ', data: result });
 
 	} catch (error) {
 		console.error('Error during login:', error);
