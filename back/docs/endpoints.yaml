@@ -8,6 +8,7 @@ endpoints:
         data:
           username: example_user
           password: securepassword
+          adult: example_boolean_value
 
   - path: /auth/login
       method: POST
@@ -77,6 +78,7 @@ endpoints:
         title: example_title
         content: example_content
         visibility: example_visibility
+        adult: example_boolean_value
     headers:
       Authorization: Bearer token
 
