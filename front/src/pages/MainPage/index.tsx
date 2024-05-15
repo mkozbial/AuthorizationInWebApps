@@ -85,6 +85,13 @@ const MainPage: React.FC = () => {
         const url = 'http://localhost:8080/posts/edit';
         const token = localStorage.getItem("accessToken");
 
+        const data = {
+            post_id: postID,
+            ...(postNewTitle && { title: postNewTitle }),
+            ...(postNewContent && { content: postNewContent }),
+            ...(visibility && { visibility: visibility })
+        };
+
         return fetch(url, {
             method: 'PUT',
             headers: {
@@ -117,6 +124,7 @@ const MainPage: React.FC = () => {
     function deletePost(postID: string) {
         const url = 'http://localhost:8080/posts/delete';
         const token = localStorage.getItem("accessToken");
+
 
         return fetch(url, {
             method: 'DELETE',
