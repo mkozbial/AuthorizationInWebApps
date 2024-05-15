@@ -15,7 +15,8 @@ class FBUser {
       }
     
     static deserialize(uid, jsonString) {
-        const data = JSON.parse(jsonString);
+        console.log(jsonString);
+        const data = JSON.parse(JSON.stringify(jsonString));
         return new FBUser(uid, data.email, data.accountType);
     }
   }

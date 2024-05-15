@@ -3,7 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { FBUser } from './fb_user';
 
-const FirebaseUserAccountType = {
+export const FirebaseUserAccountType = {
   USER: 'user',
   MODERATOR: 'moderator',
   ROOT: 'root'
@@ -61,20 +61,14 @@ class FBUserController {
       const userCredential = await this.auth.signInWithEmailAndPassword(email, password);
       
       // Retrieve from database
-      const serializedUser = await this.usersCollection.doc(userCredential.user.uid).get().data(); // TODO: Check if document exists
-      this.user = FBUser.deserialize(serializedUser);
+      const userDoc = await this.usersCollection.doc(userCredential.user.uid).get();
+      if (userDoc.exists) {
+          const serializedUser = userDoc.data();
+          this.user = FBUser.deserialize(userCredential.user.uid, serializedUser);
+      } else {
+          throw new Error("Error!");
+      }
 
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  // Add more methods as needed
-
-  // For example, method to update user profile
-  async updateUserProfile(uid, profile) {
-    try {
-      await this.auth.updateProfile(uid, profile);
     } catch (error) {
       throw error;
     }

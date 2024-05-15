@@ -1,16 +1,26 @@
 import React, { useState } from 'react';
 import FBUserController from '../../../utils/fb_user_controller';
+import { useNavigate } from "react-router-dom";
 
-const FirebaseLoginPage = () => {
+const FirebaseRegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleLogin = async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+    if (password.length < 5) {
+      setError('Password must be at least 5 characters long.');
+      return;
+    }
     try {
-      await FBUserController.getInstance().signInWithEmailAndPassword(email, password);
-
+       await FBUserController.getInstance().createUserWithEmailAndPassword(email, password);
+    
+      setSuccessMessage('Registration successful! You can now log in.');
+      setEmail('');
+      setPassword('');
+      setError('');
     } catch (error) {
       setError(error.message);
     }
@@ -18,8 +28,8 @@ const FirebaseLoginPage = () => {
 
   return (
     <div>
-      <h1>Sign in</h1>
-      <form onSubmit={handleLogin} className="login-form">
+      <h1>Register</h1>
+      <form onSubmit={handleRegister} className="register-form">
         <div className="form-group">
           <label htmlFor="email">Email Address</label>
           <input
@@ -42,11 +52,12 @@ const FirebaseLoginPage = () => {
             required
           />
         </div>
-        <button type="submit" className="btn-signin">Sign In</button>
+        <button type="submit" className="btn-register">Register</button>
       </form>
       {error && <div className="error-popup">{error}</div>}
+      {successMessage && <div className="success-message">{successMessage}</div>}
     </div>
   );
 };
 
-export default FirebaseLoginPage;
+export default FirebaseRegisterPage;

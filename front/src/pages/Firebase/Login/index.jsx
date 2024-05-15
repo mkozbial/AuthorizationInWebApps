@@ -1,25 +1,18 @@
 import React, { useState } from 'react';
 import FBUserController from '../../../utils/fb_user_controller';
+import { useNavigate } from "react-router-dom";
 
-const FirebaseRegisterPage = () => {
+const FirebaseLoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
-  const handleRegister = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (password.length < 5) {
-      setError('Password must be at least 5 characters long.');
-      return;
-    }
     try {
-       await FBUserController.getInstance().createUserWithEmailAndPassword(email, password);
-    
-      setSuccessMessage('Registration successful! You can now log in.');
-      setEmail('');
-      setPassword('');
-      setError('');
+      await FBUserController.getInstance().signInWithEmailAndPassword(email, password);
+      navigate('/firebase/main');
     } catch (error) {
       setError(error.message);
     }
@@ -27,8 +20,8 @@ const FirebaseRegisterPage = () => {
 
   return (
     <div>
-      <h1>Register</h1>
-      <form onSubmit={handleRegister} className="register-form">
+      <h1>Sign in</h1>
+      <form onSubmit={handleLogin} className="login-form">
         <div className="form-group">
           <label htmlFor="email">Email Address</label>
           <input
@@ -51,12 +44,11 @@ const FirebaseRegisterPage = () => {
             required
           />
         </div>
-        <button type="submit" className="btn-register">Register</button>
+        <button type="submit" className="btn-signin">Sign In</button>
       </form>
       {error && <div className="error-popup">{error}</div>}
-      {successMessage && <div className="success-message">{successMessage}</div>}
     </div>
   );
 };
 
-export default FirebaseRegisterPage;
+export default FirebaseLoginPage;
