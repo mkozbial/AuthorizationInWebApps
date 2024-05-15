@@ -5,12 +5,13 @@ import { ReactComponent as Pen } from "../../assets/icons/pencil-square.svg";
 import { ReactComponent as X } from "../../assets/icons/x-lg.svg";
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Dialog from '@radix-ui/react-dialog';
+import UseGetUser from "../../hooks/useGetUser.tsx";
 
 const AdminPage: React.FC = () => {
     const [users, setUsers] = useState<any[]>([]);
     const [selectedUserType, setSelectedUserType] = useState("user");
     const [selectedUserID, setSelectedUserID] = useState("");
-    const myUsername = localStorage.getItem("username");
+    const { username } = UseGetUser();
 
     function getUsersList() {
           const getUsers = () => {
@@ -102,7 +103,7 @@ const AdminPage: React.FC = () => {
                 <p className="admin-panel__header">Admin Panel</p>
                 <div className="admin-panel__user-list">
                     <p className="admin-panel__user-list__title">Users List</p>
-                    {users.map((user, id) => user.username !== myUsername && (
+                    {users.map((user, id) => user.username !== username && (
                         <>
                             <div key={user.user_id} className="admin-panel__user">
                                 <div className="admin-panel__user-info">

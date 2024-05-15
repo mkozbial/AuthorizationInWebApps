@@ -40,7 +40,6 @@ const Login: React.FC = () => {
             const { token, user } = data;
             console.log(data);
             localStorage.setItem('accessToken', token);
-            localStorage.setItem('username', user.username);
             navigate('/main');
         })
         .catch(error => {
