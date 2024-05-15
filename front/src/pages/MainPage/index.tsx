@@ -19,7 +19,7 @@ const MainPage: React.FC = () => {
     const [newTitle, setNewTitle] = useState("");
     const [newContent, setNewContent] = useState("");
     const [newVisibility, setNewVisibility] = useState("public");
-    const { userId, userType } = UseGetUser();
+    const { userId, userType, isAdult } = UseGetUser();
     const [isChecked, setIsChecked] = useState(false);
     const navigate = useNavigate();
 
@@ -27,7 +27,6 @@ const MainPage: React.FC = () => {
         const url = 'http://localhost:8080/posts/upload';
         const token = localStorage.getItem("accessToken");
 
-        console.log(isChecked)
 
         return fetch(url, {
             method: 'POST',
@@ -38,7 +37,8 @@ const MainPage: React.FC = () => {
             body: JSON.stringify({
                 title: title,
                 content: content,
-                visibility: postVisibility
+                visibility: postVisibility,
+                adult: isChecked
             }),
         })
         .then(response => {
@@ -205,7 +205,7 @@ const MainPage: React.FC = () => {
                         maxLength={500}
                     />
                     <div className="post__controls">
-                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                        {isAdult && <div style={{ display: 'flex', alignItems: 'center' }}>
                         <Checkbox.Root className="register__checkbox-root" id="c1" onCheckedChange={handleCheckboxChange}>
                             <Checkbox.Indicator className="register__checkbox-indicator" >
                                 <Check className="register__checkbox-check"/>
@@ -214,7 +214,7 @@ const MainPage: React.FC = () => {
                         <label className="Label" htmlFor="c1">
                             18+
                         </label>
-                        </div>
+                        </div>}
                         <RadioGroup.Root className="post-radio" defaultValue="default" aria-label="View density">
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <RadioGroup.Item className="post-radio__item" value="default" id="r1" onClick={() => { setVisibilty("public"); }}>
@@ -251,6 +251,7 @@ const MainPage: React.FC = () => {
                             <div className="posts-list__icons">
                                 {(post.user_id === userId || userType === "admin" || userType === "editor") &&
                                     <>
+                                        {post.adult && <p>18+</p>}
                                         <Dialog.Trigger asChild>
                                             <Pen className="posts-list__icon" onClick={() => { setSelectedPost(post.post_id); }} />
                                         </Dialog.Trigger>

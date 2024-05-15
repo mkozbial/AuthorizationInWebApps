@@ -33,6 +33,7 @@ const Register: React.FC = () => {
                 username: login,
                 password: password,
                 user_type: 'user',
+                adult: isChecked
             }),
         })
             .then(response => {

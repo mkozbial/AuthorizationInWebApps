@@ -5,6 +5,7 @@ const UseGetUser = () => {
     const [userType, setUserType] = useState('');
     const [userId, setUserId] = useState('');
     const [username, setUsername] = useState('');
+    const [isAdult, setIsAdult] = useState('');
 
     useEffect(() => {
         if (!token) {
@@ -28,13 +29,14 @@ const UseGetUser = () => {
             setUserType(data.data.user_type);
             setUserId(data.data.user_id);
             setUsername(data.data.username);
+            setIsAdult(data.data.adult);
         })
         .catch(error => {
             console.error('There was a problem with fetching user info:', error);
         });
     }, [token]);
 
-    return { userType, userId, username };
+    return { userType, userId, username, isAdult };
 }
 
 export default UseGetUser;
