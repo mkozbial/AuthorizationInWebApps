@@ -10,12 +10,14 @@ import { User } from 'models/User';
 export const getPosts = async (req: Request, res: Response) => {
     const userId = req.body.user.userId;
     const userRole = (await userService.getUserById(userId)).user_type;
-    console.log(userRole);
+    const isUserAdult = (await userService.getUserById(userId)).adult;
 
     try {
         let posts;
         if (userRole === 'admin' || userRole === 'editor') {
             posts = await postService.getAllPosts();
+        } else if (isUserAdult === false) {
+            posts = await postService.getUserAndPublicPostsNotForAdults(userId);
         } else {
             posts = await postService.getUserAndPublicPosts(userId);
         }
@@ -29,10 +31,10 @@ export const getPosts = async (req: Request, res: Response) => {
 
 export const uploadPost = async(req: Request, res: Response) => {
 
-    const { title, content, visibility} = req.body;
+    const { title, content, visibility, adult} = req.body;
     const user_id = req.body.user.userId;
     try {
-        const post = await postService.createPost(title, content, visibility, user_id);
+        const post = await postService.createPost(title, content, visibility, user_id, adult);
         res.status(StatusCodes.CREATED).json({ message: 'Post uploaded successfully!', post });
     } catch (error) {
         console.error('Error uploading post:', error);
