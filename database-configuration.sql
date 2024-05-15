@@ -3,6 +3,7 @@ CREATE TABLE users (
     username VARCHAR(100) NOT NULL,
     password VARCHAR(255) NOT NULL,
     user_type VARCHAR(10) CHECK (user_type IN ('admin', 'user', 'editor')) NOT NULL,
+    adult BOOLEAN NOT NULL DEFAULT false,
     UNIQUE (username)
 );
 
@@ -12,5 +13,6 @@ CREATE TABLE posts (
     content TEXT NOT NULL,
     visibility VARCHAR(10) CHECK (visibility IN ('private', 'public')) NOT NULL,
     user_id INT NOT NULL,
+    adult BOOLEAN NOT NULL DEFAULT false,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
