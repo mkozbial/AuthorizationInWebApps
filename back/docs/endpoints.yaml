@@ -56,5 +56,50 @@ endpoints:
           user_type: user
     headers:
       Authorization: Bearer token
+
+  - path: /posts/upload
+    method: POST
+    description: Upload new post
+    parameters: []
+    payload:
+      contentType: application/json
+      data:
+        title: example_title
+        content: example_content
+        visibility: example_visibility
+    headers:
+      Authorization: Bearer token
+
+  - path: /posts/
+    method: GET
+    description: Get public and given user posts
+    parameters: []
+    headers:
+      Authorization: Bearer token
+
+  - path: /posts/edit
+    method: PUT
+    description: Edit post
+    parameters: []
+    payload:
+      contentType: application/json
+      data:
+        post_id: example_post_id
+        title: example_changed_title
+        content: example_changed_content
+        visibility: example_visibility
+    headers:
+      Authorization: Bearer token
+
+  - path: /posts/delete
+    method: PUT
+    description: Delete post
+    parameters: []
+    payload:
+      contentType: application/json
+      data:
+        post_id: example_post_id
+    headers:
+      Authorization: Bearer token
   
   
