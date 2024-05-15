@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Authorization from "./AuthorizationPage/index.tsx";
-import UserPage from "./UserPage/index.tsx";
+import MainPage from "./MainPage/index.tsx";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import ProtectedRoute from "../components/ProtectedRoute/index.tsx";
 import USER_ROLES from "../utils/consts/intex.tsx";
@@ -58,7 +58,7 @@ const App = () => {
             <Route path="/firebase/main" element={<FirebaseHomepage />} />
             {/* protected */}
             <Route element={<ProtectedRoute allowedRoles={[USER_ROLES.USER, USER_ROLES.EDITOR, USER_ROLES.ADMIN]} />}>
-                <Route path="/main" element={<UserPage />} />
+                <Route path="/main" element={<MainPage />} />
             </Route>
             <Route element={<ProtectedRoute allowedRoles={[USER_ROLES.ADMIN]} />}>
                 <Route path="/admin-panel" element={<AdminPage />} />
