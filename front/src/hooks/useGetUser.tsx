@@ -25,7 +25,6 @@ const UseGetUser = () => {
             return response.json();
         })
         .then(data => {
-            console.log(data)
             setUserType(data.data.user_type);
             setUserId(data.data.user_id);
             setUsername(data.data.username);

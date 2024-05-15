@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import * as Tooltip from '@radix-ui/react-tooltip';
+import * as Checkbox from '@radix-ui/react-checkbox';
+import { ReactComponent as Check } from "../../assets/icons/check.svg";
 import "./Register.scss";
 
 const Register: React.FC = () => {
@@ -9,11 +11,14 @@ const Register: React.FC = () => {
     const [validPassword, setValidPassword] = useState(true);
     const [validMessage, setValidMessage] = useState("");
     const [message, setMessage] = useState("");
+    const [isChecked, setIsChecked] = useState(false);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-       validatePassword(password);
+        validatePassword(password);
+        
+        console.log(isChecked);
 
         if (!validPassword) {
             return;
@@ -74,6 +79,10 @@ const Register: React.FC = () => {
         return validPassword;
     };
 
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked); 
+    };
+
     return (
         <div className="register">
             <h2 className="register__heading">REGISTER</h2>
@@ -109,6 +118,18 @@ const Register: React.FC = () => {
                             value={repPassword}
                             onChange={(e) => { setRepPassword(e.target.value);  validatePassword(e.target.value); setMessage(""); }}
                         />
+                    </label>
+                    <label className="register__label">
+                       <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Checkbox.Root className="register__checkbox-root" id="c1" onCheckedChange={handleCheckboxChange}>
+                            <Checkbox.Indicator className="register__checkbox-indicator" >
+                                <Check className="register__checkbox-check"/>
+                            </Checkbox.Indicator>
+                        </Checkbox.Root>
+                        <label className="Label" htmlFor="c1">
+                            I am an adult
+                        </label>
+                        </div>
                     </label>
                     {password !== repPassword && <p className="register__match">Passwords don't match</p>}
                     {!validPassword &&

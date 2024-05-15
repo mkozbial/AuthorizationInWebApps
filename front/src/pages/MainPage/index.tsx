@@ -4,9 +4,10 @@ import * as Dialog from '@radix-ui/react-dialog';
 import { ReactComponent as Trash} from "../../assets/icons/trash.svg";
 import { ReactComponent as Pen } from "../../assets/icons/pencil-square.svg";
 import { ReactComponent as X } from "../../assets/icons/x-lg.svg";
+import { ReactComponent as Check } from "../../assets/icons/check.svg";
 import "./MainPage.scss";
 import UseGetUser from "../../hooks/useGetUser.tsx";
-import { Navigate } from "react-router";
+import * as Checkbox from '@radix-ui/react-checkbox';
 import { useNavigate } from "react-router-dom";
 
 const MainPage: React.FC = () => {
@@ -19,11 +20,14 @@ const MainPage: React.FC = () => {
     const [newContent, setNewContent] = useState("");
     const [newVisibility, setNewVisibility] = useState("public");
     const { userId, userType } = UseGetUser();
+    const [isChecked, setIsChecked] = useState(false);
     const navigate = useNavigate();
 
     function sendPost(postVisibility: string, content: string, title: string) {
         const url = 'http://localhost:8080/posts/upload';
         const token = localStorage.getItem("accessToken");
+
+        console.log(isChecked)
 
         return fetch(url, {
             method: 'POST',
@@ -171,6 +175,10 @@ const MainPage: React.FC = () => {
     useEffect(() => {
         getPostsList();
     }, []);
+
+    const handleCheckboxChange = () => {
+        setIsChecked(!isChecked); 
+    };
     
     return (
         <Dialog.Root>
@@ -197,6 +205,16 @@ const MainPage: React.FC = () => {
                         maxLength={500}
                     />
                     <div className="post__controls">
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                        <Checkbox.Root className="register__checkbox-root" id="c1" onCheckedChange={handleCheckboxChange}>
+                            <Checkbox.Indicator className="register__checkbox-indicator" >
+                                <Check className="register__checkbox-check"/>
+                            </Checkbox.Indicator>
+                        </Checkbox.Root>
+                        <label className="Label" htmlFor="c1">
+                            18+
+                        </label>
+                        </div>
                         <RadioGroup.Root className="post-radio" defaultValue="default" aria-label="View density">
                             <div style={{ display: 'flex', alignItems: 'center' }}>
                                 <RadioGroup.Item className="post-radio__item" value="default" id="r1" onClick={() => { setVisibilty("public"); }}>
@@ -216,7 +234,7 @@ const MainPage: React.FC = () => {
                             </div>
                         </RadioGroup.Root>
                         <button onClick={() => { sendPost(visibilty, content, title); }} type="submit" className="post__button">
-                            Post
+                            Send
                         </button>
                     </div>
                     
@@ -262,7 +280,6 @@ const MainPage: React.FC = () => {
                                                     onChange={(e) => setNewTitle(e.target.value)}
                                                     placeholder="Title"
                                                     maxLength={70}
-                                                    //value={post.title}
                                                 />
                                             </div>
                                             <div className="post-dialog__field">
@@ -277,7 +294,6 @@ const MainPage: React.FC = () => {
                                                     onChange={(e) => setNewContent(e.target.value)}
                                                     placeholder="Content"
                                                     maxLength={500}
-                                                    //value={post.content}
                                                 />
                                             </div>
                                             <div className="post-dialog__field">
