@@ -3,7 +3,7 @@ import { User } from '../models/User';
 
 export const userService = {
       async createUser(username: string, password: string, adult: boolean) {
-            const result = await pool.query('INSERT INTO users (username, password, user_type, adult) VALUES ($1, $2, $3 $4) RETURNING *', [username, password, 'user', adult]);
+            const result = await pool.query('INSERT INTO users (username, password, user_type, adult) VALUES ($1, $2, $3, $4) RETURNING *', [username, password, 'user', adult]);
             return result.rows[0];
       },
 

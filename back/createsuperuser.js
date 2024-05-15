@@ -40,7 +40,7 @@ async function createSuperUser() {
 
             const insertQuery = {
                   text: `INSERT INTO users (username, password, user_type, adult)
-                        VALUES ($1, $2, $3)`,
+                        VALUES ($1, $2, $3, $4)`,
                   values: [username, hashedPassword, 'admin', true],
             };
 

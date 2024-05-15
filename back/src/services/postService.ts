@@ -16,10 +16,18 @@ export const postService = {
         return result.rows;
     },
 
-    async createPost(title: string, content: string, visibility: string, user_id: number): Promise<Post> {
+    async getUserAndPublicPostsNotForAdults(userId: number): Promise<Post[]> {
         const result = await pool.query(
-            'INSERT INTO posts (title, content, visibility, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
-            [title, content, visibility, user_id]
+          'SELECT * FROM posts WHERE (visibility = $1 OR user_id = $2) AND adult = $3',
+          ['public', userId, false]
+        );
+        return result.rows;
+    },
+
+    async createPost(title: string, content: string, visibility: string, user_id: number, adult: boolean): Promise<Post> {
+        const result = await pool.query(
+            'INSERT INTO posts (title, content, visibility, user_id, adult) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [title, content, visibility, user_id, adult]
         );
         return result.rows[0];
     },
