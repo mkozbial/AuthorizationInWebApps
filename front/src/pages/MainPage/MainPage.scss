@@ -1,0 +1,225 @@
+.main-page {
+    $root: &;
+
+    color: #e6a95b;
+    font-family: 'Roboto Mono', monospace;
+    font-weight: 100;
+    margin: 1em 0 0 0;
+
+    &__heading {
+        font-size: 3em;
+        text-align: center;
+    }
+
+}
+.post {
+    $root: &;
+
+    border: 2px solid #e6a95b;
+    width: 40%;
+    height: 10em;
+    border-radius: 1em;
+    padding: 1em;
+    font-family: 'Roboto Mono', monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
+
+    &__title {
+        border:none;
+        font-family: 'Roboto Mono', monospace;
+        margin: 0 0 1em 0;
+        text-align: start;
+        resize: none;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+
+    &__input {
+        border:none;
+        font-family: 'Roboto Mono', monospace;
+        width: 100%;
+        height: 8em;
+        text-align: start;
+        resize: none;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+
+    &__button {
+        border-radius: 4px;
+        padding: 0 15px;
+        font-size: 15px;
+        line-height: 1;
+        font-weight: 500;
+        height: 35px;
+        background-color: #9f9eff;
+        color: white;
+        box-shadow: 0 2px 10px var(#9f9eff);
+        border: none;
+        transition: background-color 0.3s;
+        width: 10em;
+        margin: 0 0 0 1em;
+
+        &:hover {
+            background-color: #7e7ddb;
+            transition: background-color 0.3s;
+        }
+
+        &:focus {
+            box-shadow: 1px 4px 10px #00000027;
+        }
+
+        &:active {
+            box-shadow: 1px 4px 10px #00000027;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
+
+.posts-list {
+    $root: &;
+    max-width: 60%;
+    margin: 0 auto;
+
+    &__heading {
+        font-size: 2em;
+        text-align: left;
+        margin: 1em 2em;
+    }
+
+    &__post {
+        border-radius: 1em;
+        border: 2px solid rgba(160, 158, 255, 0.5803921569);
+        padding: 1em;
+        margin: 2em 2em;
+        color: #7371d1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__post-title {
+        font-family: 'Roboto Mono', monospace;
+        text-decoration: underline;
+        font-size: 1.5em;
+        margin: 0 0 0.5em 0;
+    }
+
+    &__post-content {}
+
+    &__icons {
+        display: flex;
+    }
+
+    &__icon {
+        margin: 1em 1em 1em 0;
+        transition: fill 0.3s;
+        fill: #7371d1;
+        width: 1.5em;
+        height: 1.5em;
+
+        &:hover {
+            fill: #3735b9;
+            transition: fill 0.3s;
+        }
+    }
+}
+
+.post-radio {
+    $root: &;
+
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+
+    &__item {
+        background-color: white;
+        width: 25px;
+        height: 25px;
+        border-radius: 100%;
+        border-color: transparent;
+        box-shadow: 1px 4px 10px #00000027;
+        transition: border-color 0.3s;
+    }
+
+    &__item:hover {
+        border-color: #7371d1;
+        transition: border-color 0.3s;
+    }
+
+    &__item:focus {
+        box-shadow: 1px 4px 10px #00000027;
+    }
+
+    &__indicator {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        position: relative;
+    }
+
+    &__indicator::after {
+        content: '';
+        display: block;
+        width: 1em;
+        height: 0.7em;
+        border-radius: 50%;
+        background-color: #7371d1;
+    }
+
+    &__label {
+        color: #646464;
+        font-size: 15px;
+        line-height: 1;
+        padding-left: 15px;
+    }
+}
+
+.post-dialog {
+    $root: &;
+
+    &__field {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: flex-start;
+    }
+
+    &__title {
+        resize: none;
+        border: none;
+        color: #646464;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__content {
+        resize: none;
+        border: none;
+        color: #646464;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__label {
+        margin: 0 2em 0 0;
+    }
+}

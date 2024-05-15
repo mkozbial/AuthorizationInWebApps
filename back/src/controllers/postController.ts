@@ -43,7 +43,7 @@ export const uploadPost = async(req: Request, res: Response) => {
 };
 
 export const deletePost = async (req: Request, res: Response) => {
-    const postId = req.body.id;
+    const postId = parseInt(req.body.post_id, 10);
     const userId = req.body.user.userId;
     try {
         const post = await postService.getPostById(postId);
