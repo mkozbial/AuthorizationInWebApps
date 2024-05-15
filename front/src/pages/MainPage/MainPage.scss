@@ -68,6 +68,7 @@
         height: 8em;
         text-align: start;
         resize: none;
+        overflow: hidden;
 
         &:focus {
             border: none;
