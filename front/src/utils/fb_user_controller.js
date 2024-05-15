@@ -79,7 +79,7 @@ class FBUserController {
   async getPosts() {
       try {
         if (this.user.accountType == FirebaseUserAccountType.ROOT) {
-          const snapshot = await this.postsCollection.where('visibility', 'in', ['public, private']).get();
+          const snapshot = await this.postsCollection.where('visibility', 'in', ['public', 'private']).get();
           const postsData = snapshot.docs.map(doc => {
               const data = doc.data();
               return FBPost.deserialize(doc.id, data);

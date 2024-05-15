@@ -50,10 +50,10 @@ export default function Posts() {
                             <p style={{ marginBottom: '5px', fontSize: '14px' }}>{post.text}</p>
                             <p style={{ marginBottom: '5px', fontSize: '12px' }}>Added by User ID: {post.userId}</p>
                             <p style={{ marginBottom: '5px', fontSize: '12px' }}>Visibility: {post.visibility}</p>
-                            {(FBUserController.getInstancer().user.accountType == FirebaseUserAccountType.ROOT || post.userId === FBUserController.getInstance().user.uid) && (
+                            {(FBUserController.getInstance().user.accountType == FirebaseUserAccountType.ROOT || post.userId === FBUserController.getInstance().user.uid) && (
                                 <button onClick={() => handleEditPost(post)} style={{ padding: '5px 10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Edit</button>
                             )}
-                            {(FBUserController.getInstancer().user.accountType == FirebaseUserAccountType.ROOT || post.userId === FBUserController.getInstance().user.uid) && (
+                            {(FBUserController.getInstance().user.accountType == FirebaseUserAccountType.ROOT || FBUserController.getInstance().user.accountType == FirebaseUserAccountType.MODERATOR || post.userId === FBUserController.getInstance().user.uid) && (
                                 <button onClick={() => handleRemovePost(post)} style={{ margin: '5px', padding: '5px 10px', backgroundColor: '#DC143C', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Remove</button>
                             )}
                         </div>
