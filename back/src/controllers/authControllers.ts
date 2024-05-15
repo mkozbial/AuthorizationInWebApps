@@ -8,11 +8,11 @@ import {
 } from 'http-status-codes';
 
 export const register = async (req: Request, res: Response) => {
-  	const { username, password } = req.body;
+  	const { username, password, adult } = req.body;
 
 	try {
 		const hashedPassword = await bcryptjs.hash(password, 10);
-		const user = await userService.createUser(username, hashedPassword);  
+		const user = await userService.createUser(username, hashedPassword, adult);  
 		res.status(StatusCodes.CREATED).json({ message: 'User registered successfully!', user });
 	} catch (error) {
 		console.error('Error during registration:', error);
