@@ -48,7 +48,7 @@ const AdminPage: React.FC = () => {
             setUsers(usersData);
         })
         .catch(error => {
-            console.error('Wystąpił błąd podczas pobierania użytkowników:', error);
+            console.error('There was a problem fetching users:', error);
         });
     }
 
@@ -85,6 +85,36 @@ const AdminPage: React.FC = () => {
         });
     }
 
+    const deleteUser = (userID: string) => {
+    const url = 'http://localhost:8080/admin/users';
+    const token = localStorage.getItem("accessToken");
+
+    return fetch(url, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            user_id: userID,
+        }),
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        getUsersList(); 
+        return data;
+    })
+    .catch(error => {
+        console.error('There was a problem deleting user:', error);
+        throw error;
+    });
+}
+
     const handleUserTypeChange = (newUserType: string, userID: string) => {
         editRole(newUserType, userID)
             .then(newRole => {
@@ -93,8 +123,18 @@ const AdminPage: React.FC = () => {
                 }
         })
         .catch(error => {
-            console.error("Błąd podczas zmiany typu użytkownika:", error);
+            console.error("Error while changing user:", error);
         });
+    };
+
+    const handleDeleteUser = (userID: string) => {
+        deleteUser(userID)
+            .then(() => {
+                getUsersList();
+            })
+            .catch(error => {
+                console.error("Error while deleting user:", error);
+            });
     };
 
     return (
@@ -115,7 +155,7 @@ const AdminPage: React.FC = () => {
                                     <Dialog.Trigger asChild>
                                         <Pen className="admin-panel__icon" onClick={() => { setSelectedUserID(user.user_id)}}/>
                                     </Dialog.Trigger>
-                                    <Trash className="admin-panel__icon" />
+                                    <Trash className="admin-panel__icon" onClick={() => { handleDeleteUser(user.user_id)}}/>
                                 </div>
                             </div>
                             <Dialog.Portal>

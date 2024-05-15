@@ -12,5 +12,5 @@ CREATE TABLE posts (
     content TEXT NOT NULL,
     visibility VARCHAR(10) CHECK (visibility IN ('private', 'public')) NOT NULL,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
