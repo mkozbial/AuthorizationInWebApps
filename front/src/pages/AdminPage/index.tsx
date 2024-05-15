@@ -5,7 +5,6 @@ import { ReactComponent as Pen } from "../../assets/icons/pencil-square.svg";
 import { ReactComponent as X } from "../../assets/icons/x-lg.svg";
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Dialog from '@radix-ui/react-dialog';
-import { Navigate } from "react-router";
 
 const AdminPage: React.FC = () => {
     const [users, setUsers] = useState<any[]>([]);
@@ -96,11 +95,6 @@ const AdminPage: React.FC = () => {
             console.error("Błąd podczas zmiany typu użytkownika:", error);
         });
     };
-
-    const getUserId = (username: string) => {
-
-    }
-
 
     return (
         <Dialog.Root>
