@@ -41,7 +41,7 @@ const MainPage: React.FC = () => {
             return response.json();
         })
         .then(data => {
-            getPostsList(); // Odświeżenie listy postów po dodaniu
+            getPostsList();
             return data;
         })
         .catch(error => {
