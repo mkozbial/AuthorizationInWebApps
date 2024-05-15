@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import { postService } from '../services/postService';
-import {userService} from '../services/userService';
+import { userService } from '../services/userService';
 import { Post } from '../models/Post';
 import {
 	StatusCodes,
 } from 'http-status-codes';
+import { User } from 'models/User';
 
 export const getPosts = async (req: Request, res: Response) => {
     const userId = req.body.user.userId;
@@ -63,11 +64,13 @@ export const editPost = async (req: Request, res: Response) => {
     const postId = parseInt(req.body.post_id, 10);
     const { title, content, visibility } = req.body;
     const userId = req.body.user.userId;
-  
-    try {
-        const post = await postService.getPostById(postId);
     
-        if (!post || post.user_id !== userId) {
+    try {
+        const user = await userService.getUserById(userId);
+        const post = await postService.getPostById(postId);
+        console.log(canEdit(user))
+    
+        if ((!post || post.user_id !== userId) && !canEdit(user)) {
           return res.status(StatusCodes.FORBIDDEN).json({ message: 'You are not allowed to edit this post' });
         }
     
@@ -87,3 +90,16 @@ export const editPost = async (req: Request, res: Response) => {
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error editing post' });
     }
 };
+
+function canEdit(user : User): boolean {
+
+    const allowedRoles = ["admin", "editor"]
+    
+    if (!user)
+        return false;
+
+    if (!allowedRoles.includes(user.user_type))
+        return false;
+
+    return true;
+}
