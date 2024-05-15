@@ -6,12 +6,14 @@ import { ReactComponent as X } from "../../assets/icons/x-lg.svg";
 import * as RadioGroup from '@radix-ui/react-radio-group';
 import * as Dialog from '@radix-ui/react-dialog';
 import UseGetUser from "../../hooks/useGetUser.tsx";
+import { useNavigate } from "react-router-dom";
 
 const AdminPage: React.FC = () => {
     const [users, setUsers] = useState<any[]>([]);
     const [selectedUserType, setSelectedUserType] = useState("user");
     const [selectedUserID, setSelectedUserID] = useState("");
     const { username } = UseGetUser();
+    const navigate = useNavigate();
 
     function getUsersList() {
           const getUsers = () => {
@@ -137,10 +139,15 @@ const AdminPage: React.FC = () => {
             });
     };
 
+    const handleUserPanelButton = () => {
+        navigate("/main");
+    }
+
     return (
         <Dialog.Root>
             <div className="admin-panel">
                 <p className="admin-panel__header">Admin Panel</p>
+                <button onClick={() => {handleUserPanelButton()}} className="admin-panel__nav">Main Panel</button>
                 <div className="admin-panel__user-list">
                     <p className="admin-panel__user-list__title">Users List</p>
                     {users.map((user, id) => user.username !== username && (

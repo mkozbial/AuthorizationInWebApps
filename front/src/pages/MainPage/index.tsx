@@ -6,6 +6,8 @@ import { ReactComponent as Pen } from "../../assets/icons/pencil-square.svg";
 import { ReactComponent as X } from "../../assets/icons/x-lg.svg";
 import "./MainPage.scss";
 import UseGetUser from "../../hooks/useGetUser.tsx";
+import { Navigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const MainPage: React.FC = () => {
     const [content, setContent] = useState("");
@@ -17,6 +19,7 @@ const MainPage: React.FC = () => {
     const [newContent, setNewContent] = useState("");
     const [newVisibility, setNewVisibility] = useState("public");
     const { userId, userType } = UseGetUser();
+    const navigate = useNavigate();
 
     function sendPost(postVisibility: string, content: string, title: string) {
         const url = 'http://localhost:8080/posts/upload';
@@ -85,6 +88,11 @@ const MainPage: React.FC = () => {
         const url = 'http://localhost:8080/posts/edit';
         const token = localStorage.getItem("accessToken");
 
+        getPostsList();
+        setNewTitle("");
+        setNewContent("");
+        setNewVisibility("");
+
         const data = {
             post_id: postID,
             ...(postNewTitle && { title: postNewTitle }),
@@ -98,12 +106,7 @@ const MainPage: React.FC = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({
-                post_id: postID,
-                title: postNewTitle,
-                content: postNewContent,
-                visibility: visibility
-            }),
+            body: JSON.stringify(data),
         })
         .then(response => {
             if (!response.ok) {
@@ -112,7 +115,6 @@ const MainPage: React.FC = () => {
             return response.json();
         })
         .then(data => {
-            getPostsList();
             return data;
         })
         .catch(error => {
@@ -152,6 +154,20 @@ const MainPage: React.FC = () => {
         });
     }
 
+    const handleAdminPanelButton = () => {
+        navigate("/admin-panel");
+    }
+
+    const handleEditPost = (postID: string, postNewTitle: string, postNewContent: string, visibility: string) => {
+    editPost(postID, postNewTitle, postNewContent, visibility)
+        .then(() => {
+            getPostsList();
+        })
+        .catch(error => {
+            console.error("Error while deleting user:", error);
+        });
+    };
+
     useEffect(() => {
         getPostsList();
     }, []);
@@ -160,6 +176,7 @@ const MainPage: React.FC = () => {
         <Dialog.Root>
             <div className="main-page">
                 <p className="main-page__heading">Main Page</p>
+                {userType === "admin" && <button onClick={() => {handleAdminPanelButton()}} className="main-page__nav">Admin Panel</button>}
                 <div className="post">
                     <textarea
                         name="title"
@@ -290,7 +307,7 @@ const MainPage: React.FC = () => {
                                     </fieldset>
                                     <div style={{ display: 'flex', marginTop: 25, justifyContent: 'flex-end' }}>
                                         <Dialog.Close asChild>
-                                                <button className="dialog__button" onClick={() => { editPost(selectedPost, newTitle, newContent, newVisibility); }}>Save changes</button>
+                                                <button className="dialog__button" onClick={() => { handleEditPost(selectedPost, newTitle, newContent, newVisibility); }}>Save changes</button>
                                         </Dialog.Close>
                                     </div>
                                     <Dialog.Close asChild>
