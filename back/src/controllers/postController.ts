@@ -1,33 +1,30 @@
 import { Request, Response } from 'express';
 import { postService } from '../services/postService';
+import {userService} from '../services/userService';
 import { Post } from '../models/Post';
 import {
 	StatusCodes,
 } from 'http-status-codes';
 
-export const getAllPosts = async (req: Request, res: Response) => {
+export const getPosts = async (req: Request, res: Response) => {
+    const userId = req.body.user.userId;
+    const userRole = (await userService.getUserById(userId)).user_type;
+    console.log(userRole);
 
     try {
-        const posts = await postService.getAllPosts();
+        let posts;
+        if (userRole === 'admin' || userRole === 'editor') {
+            posts = await postService.getAllPosts();
+        } else {
+            posts = await postService.getUserAndPublicPosts(userId);
+        }
         res.status(StatusCodes.OK).json(posts);
-    } catch (error) {
+
+    } catch (error){
         console.error('Error fetching posts:', error);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching posts' });
-    }      
-
-};
-
-export const getUserAndPublicPosts = async (req: Request, res: Response) => {
-    const userId = req.body.user.userId;
-    try {
-      const posts = await postService.getUserAndPublicPosts(userId);
-      res.status(StatusCodes.OK).json(posts);
-    } catch (error) {
-      console.error('Error fetching user and public posts:', error);
-      res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching user and public posts' });
     }
-  };
-
+};
 
 export const uploadPost = async(req: Request, res: Response) => {
 
