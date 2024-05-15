@@ -39,9 +39,9 @@ async function createSuperUser() {
             console.log(hashedPassword);
 
             const insertQuery = {
-                  text: `INSERT INTO users (username, password, user_type)
+                  text: `INSERT INTO users (username, password, user_type, adult)
                         VALUES ($1, $2, $3)`,
-                  values: [username, hashedPassword, 'admin'],
+                  values: [username, hashedPassword, 'admin', true],
             };
 
             await pool.query(insertQuery);
