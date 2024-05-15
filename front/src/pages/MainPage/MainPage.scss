@@ -11,6 +11,28 @@
         text-align: center;
     }
 
+    &__nav {
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-radius: 2em;
+        background-color:#e6a95b;
+        margin: 1.5em;
+        font-family: 'Roboto Mono', monospace;
+        border: none;
+        height: 3em;
+        width: 8em;
+        color: white;
+        box-shadow: 1px 4px 5px #2727270a;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: rgb(202, 132, 41);
+            transition: background-color 0.3s;
+        }
+
+    }
+
 }
 .post {
     $root: &;
