@@ -1,5 +1,6 @@
 # Access control methods
-## How to run app locally
+## How to run frontend app locally
+**Note:** The application won't work properly if you don't run the backend locally. To learn how to do this, see READM.ME in the project's main folder.
 1. Clone this repo
 ```
 git clone git@github.com:mkozbial/Authorization_in_web_apps.git
@@ -8,20 +9,17 @@ or
 ```
 git clone https://github.com/mkozbial/Authorization_in_web_apps.git
 ```
-2. Open in editor if needed
-```
-code .
-```
-3. Check if you have npm and node installed
+
+2. Check if you have npm and node installed
 ```
 node -v
 npm -v
 ```
-![image](https://github.com/mkozbial/Authentication_in_web_apps/assets/121809496/122fb824-80dc-4b96-bb18-7080f7e0483f) \
-3.1. If not install node  \
-3.1.1 Windows \
-[For windows download here](https://nodejs.org/en/download 'Node for Windows'). \
-3.1.2 Linux
+
+3. If not install node  
+- **Windows** \
+[For windows download here](https://nodejs.org/en/download 'Node for Windows')
+- **Linux**
 ```
 npm install -g npm
 ```
@@ -29,11 +27,11 @@ npm install -g npm
 ```
 cd .\front\ 
 ```
-6. Install dependecies
+5. Install dependecies
 ```
 npm install
 ```
-7. Run app locally
+6. Run app locally
 ```
-npm start
+npm run start
 ```
