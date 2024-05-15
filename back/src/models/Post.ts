@@ -4,4 +4,5 @@ export interface Post {
     content: string;
     visibility: 'private' | 'public';
     user_id: number;
+    adult : boolean
 }
