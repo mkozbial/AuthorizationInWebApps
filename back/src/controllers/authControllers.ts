@@ -57,8 +57,6 @@ export const retriveUser = async (req: Request, res: Response) => {
             res.status(StatusCodes.BAD_REQUEST).json({ message: 'Invalid request' });
       }
 
-	console.log(user);
-
 	try {
 		const result = await userService.getUserById(user.userId);
             res.status(StatusCodes.OK).json({ message: 'Succesfully received data ', data: result });

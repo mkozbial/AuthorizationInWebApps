@@ -44,7 +44,7 @@ endpoints:
       Authorization: Bearer token
 
   - path: /admin/users/{id}
-    method: POST
+    method: PUT
     description: Modifies the given user
     parameters:
       - name: id
@@ -54,6 +54,16 @@ endpoints:
         contentType: application/json
         data:
           user_type: user
+    headers:
+      Authorization: Bearer token
+
+  - path: /admin/users
+    method: DELETE
+    description: Deletes the given user
+    payload:
+        contentType: application/json
+        data:
+          user_id: user_id
     headers:
       Authorization: Bearer token
 
@@ -92,7 +102,7 @@ endpoints:
       Authorization: Bearer token
 
   - path: /posts/delete
-    method: PUT
+    method: DELETE
     description: Delete post
     parameters: []
     payload:

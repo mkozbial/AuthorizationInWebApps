@@ -34,3 +34,19 @@ export const modifyUser = async (req: Request, res: Response) => {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching user' });
       }
 };
+
+export const deleteUser = async (req: Request, res: Response) => {
+      console.log("elo");
+      const userId = parseInt(req.body.user_id, 10);
+
+      console.log(userId);
+
+      try {
+            const result = await adminService.deleteUser(userId);
+
+            res.status(StatusCodes.OK).json({ message: 'User succesfully deleted', data: result});
+      } catch (error) {
+            console.error('Error fetching user:', error);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ message: 'Error fetching user' });
+      }
+};
