@@ -12,7 +12,8 @@ const Login: React.FC = () => {
         const accessToken = localStorage.getItem('accessToken');
 
         if (accessToken) {
-        localStorage.removeItem('accessToken');
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('username');
         }
     }, []);
 
@@ -39,7 +40,7 @@ const Login: React.FC = () => {
             const { token, user } = data;
             console.log(data);
             localStorage.setItem('accessToken', token);
-            //navigate(from, { replace: true });
+            localStorage.setItem('username', user.username);
             navigate('/main');
         })
         .catch(error => {
