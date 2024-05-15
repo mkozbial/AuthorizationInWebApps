@@ -6,6 +6,8 @@ import ProtectedRoute from "../components/ProtectedRoute/index.tsx";
 import USER_ROLES from "../utils/consts/intex.tsx";
 import Unauthorized from "./Unauthorized/index.tsx";
 import AdminPage from "./AdminPage/index.tsx";
+import FirebaseLoginPage from "./Firebase/Login/index.tsx";
+import FirebaseRegisterPage from "./Firebase/Register/index.tsx";
 
 const App: React.FC = () => {
 
@@ -14,7 +16,8 @@ const App: React.FC = () => {
             {/* public */}
             <Route path="/" element={<Authorization />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
-            
+            <Route path="/firebase/login" element={<FirebaseLoginPage />} />
+            <Route path="/firebase/register" element={<FirebaseRegisterPage />} />
             {/* protected */}
             <Route element={<ProtectedRoute allowedRoles={[USER_ROLES.USER, USER_ROLES.EDITOR, USER_ROLES.ADMIN]} />}>
                 <Route path="/main" element={<MainPage />} />

@@ -140,6 +140,14 @@ The whole setup is managed by the **docker compose**, all you have to do is fill
 node createsuperuser.js
 ```
 
+#### Creating firebase super user
+
+1. **Unfortunately right now you have to do it manually**
+
+2. **Run following script**
+```
+node --env-file=.\front\.env .\front\fb_make_root.mjs
+```
 
 
 
