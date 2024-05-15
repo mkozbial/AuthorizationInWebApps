@@ -6,11 +6,13 @@ function EditPostModal(props) {
     const [editedPost, setEditedPost] = useState(props.post);
     
     useEffect(() => {
-        setEditedPost(props.post || { title: '', text: '' });
+        setEditedPost(props.post || { title: '', text: '', visibility: "public"});
     }, [props.post]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
+        console.log(name);
+        console.log(value);
         setEditedPost({ ...editedPost, [name]: value });
     };
 
@@ -46,6 +48,15 @@ function EditPostModal(props) {
             <input type="text" name="title" value={editedPost == null ? "" : editedPost.title} onChange={handleInputChange} style={{ marginBottom: '10px', width: '100%', padding: '5px' }} />
             <label>Content:</label>
             <textarea name="text" value={editedPost == null ? "" : editedPost.text} onChange={handleInputChange} style={{ marginBottom: '10px', width: '100%', minHeight: '100px', padding: '5px' }}></textarea>
+            <div style={{ marginBottom: '8px' }}>
+                <label>
+                    Visibility:
+                    <select name="visibility" value={editedPost == null ? "visibility" : editedPost.visibility} onChange={handleInputChange} style={{ marginLeft: '10px', padding: '5px' }}>
+                        <option value="public">Public</option>
+                        <option value="private">Private</option>
+                    </select>
+                </label>
+            </div>
             <div style={{ textAlign: 'center' }}>
                 <button onClick={handleSubmit} style={{ marginRight: '10px', padding: '8px 15px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Save Changes</button>
                 <button onClick={props.onClose} style={{ padding: '8px 15px', backgroundColor: '#6c757d', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Cancel</button>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import FBUserController from '../../../../utils/fb_user_controller';
 import Posts from '../../components/Posts';
+import SignOut from '../../components/SignOut';
 
 function FirebaseUserHomepage() {
     const [newPostContent, setNewPostContent] = useState('');
@@ -46,6 +47,7 @@ function FirebaseUserHomepage() {
                 </label>
                 <button onClick={handleNewPostSubmit} style={{ margin: '5px', padding: '8px 15px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>Submit</button>
             </div>
+            <SignOut />
         </div>
     );
 

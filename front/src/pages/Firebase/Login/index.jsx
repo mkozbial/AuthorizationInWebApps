@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FBUserController from '../../../utils/fb_user_controller';
 import { useNavigate } from "react-router-dom";
-
+import '../css/AuthPage.css';
+import { FBUser } from '../../../utils/fb_user';
 const FirebaseLoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,35 +20,16 @@ const FirebaseLoginPage = () => {
   };
 
   return (
-    <div>
-      <h1>Sign in</h1>
-      <form onSubmit={handleLogin} className="login-form">
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+    <div className="auth-container">
+            <div className="auth-box">
+                <h2>Login</h2>
+                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button onClick={handleLogin}>Login</button>
+                <p>Don't have an account? <a href="/firebase/register">Register here</a></p>
+                {error && <div className="error-popup">{error}</div>}
+            </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn-signin">Sign In</button>
-      </form>
-      {error && <div className="error-popup">{error}</div>}
-    </div>
   );
 };
 

@@ -54,7 +54,7 @@ export default function Posts() {
                                 <button onClick={() => handleEditPost(post)} style={{ padding: '5px 10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Edit</button>
                             )}
                             {(FBUserController.getInstance().user.accountType == FirebaseUserAccountType.ROOT || FBUserController.getInstance().user.accountType == FirebaseUserAccountType.MODERATOR || post.userId === FBUserController.getInstance().user.uid) && (
-                                <button onClick={() => handleRemovePost(post)} style={{ margin: '5px', padding: '5px 10px', backgroundColor: '#DC143C', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Remove</button>
+                                <button onClick={() => handleRemovePost(post)} style={{ padding: '5px 10px', backgroundColor: '#DC143C', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Remove</button>
                             )}
                         </div>
                     ))}

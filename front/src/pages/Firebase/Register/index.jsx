@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FBUserController from '../../../utils/fb_user_controller';
 import { useNavigate } from "react-router-dom";
+import '../css/AuthPage.css';
 
 const FirebaseRegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -16,6 +18,7 @@ const FirebaseRegisterPage = () => {
     }
     try {
        await FBUserController.getInstance().createUserWithEmailAndPassword(email, password);
+       navigate('/firebase/main');
     
       setSuccessMessage('Registration successful! You can now log in.');
       setEmail('');
@@ -27,36 +30,17 @@ const FirebaseRegisterPage = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
-      <form onSubmit={handleRegister} className="register-form">
-        <div className="form-group">
-          <label htmlFor="email">Email Address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+      <div className="auth-container">
+            <div className="auth-box">
+                <h2>Register</h2>
+                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button onClick={handleRegister}>Register</button>
+                <p>Already have an account? <a href="/firebase/login">Login here</a></p>
+                {error && <div className="error-popup">{error}</div>}
+                {successMessage && <div className="success-message">{successMessage}</div>}
+            </div>
         </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        <button type="submit" className="btn-register">Register</button>
-      </form>
-      {error && <div className="error-popup">{error}</div>}
-      {successMessage && <div className="success-message">{successMessage}</div>}
-    </div>
   );
 };
 

@@ -3,6 +3,7 @@ import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import { FBUser } from './fb_user';
 import { FBPost } from './fb_post';
+import { useNavigate } from "react-router-dom";
 
 export const FirebaseUserAccountType = {
   USER: 'user',
@@ -62,18 +63,13 @@ class FBUserController {
     try {
       const userCredential = await this.auth.signInWithEmailAndPassword(email, password);
       
-      // Retrieve from database
-      const userDoc = await this.usersCollection.doc(userCredential.user.uid).get();
-      if (userDoc.exists) {
-          const serializedUser = userDoc.data();
-          this.user = FBUser.deserialize(userCredential.user.uid, serializedUser);
-      } else {
-          throw new Error("Error!");
-      }
-
     } catch (error) {
       throw error;
     }
+  }
+
+  async signOut() {
+    await this.auth.signOut();
   }
 
   async getPosts() {

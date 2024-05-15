@@ -11,8 +11,8 @@ function FirebaseHomepage() {
     
     useEffect(() => {
         if (!user || !user.accountType) {
-            console.log("User or account type is null, redirecting to login.");
-            navigate('/firebase/login');
+            console.log("User or account type is null, redirecting to loading.");
+            navigate('/firebase/');
         }
     }, [user, navigate]);
 
