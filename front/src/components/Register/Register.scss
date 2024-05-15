@@ -156,6 +156,10 @@
             }
         }
     }
+
+    &__match {
+        margin: 0;
+    }
     
     &__invalid {
        display: flex;
