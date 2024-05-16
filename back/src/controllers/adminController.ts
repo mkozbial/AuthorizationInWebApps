@@ -36,10 +36,7 @@ export const modifyUser = async (req: Request, res: Response) => {
 };
 
 export const deleteUser = async (req: Request, res: Response) => {
-      console.log("elo");
       const userId = parseInt(req.body.user_id, 10);
-
-      console.log(userId);
 
       try {
             const result = await adminService.deleteUser(userId);
