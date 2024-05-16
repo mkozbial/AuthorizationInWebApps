@@ -28,7 +28,9 @@ const App = () => {
           if (userDoc.exists) {
             const serializedUser = userDoc.data();
             FBUserController.getInstance().user = FBUser.deserialize(user.uid, serializedUser);
-            navigate('/firebase/main/');
+            if (location.pathname.startsWith('/firebase/')) {
+              navigate('/firebase/main/');
+            }
           } 
         } else {
           console.log("User is signed out");
@@ -52,10 +54,11 @@ const App = () => {
             <Route path="/" element={<Authorization />} />
             <Route path="/unauthorized" element={<Unauthorized />} />
             <Route path="/firebase/" element={<FirebaseLoadingPage />} />
-            {/* should be protected */}
+
             <Route path="/firebase/login" element={<FirebaseLoginPage />} />
             <Route path="/firebase/register" element={<FirebaseRegisterPage />} />
             <Route path="/firebase/main" element={<FirebaseHomepage />} />
+            
             {/* protected */}
             <Route element={<ProtectedRoute allowedRoles={[USER_ROLES.USER, USER_ROLES.EDITOR, USER_ROLES.ADMIN]} />}>
                 <Route path="/main" element={<MainPage />} />

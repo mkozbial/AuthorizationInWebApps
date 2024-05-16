@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import FBUserController from '../../../utils/fb_user_controller';
 import { useNavigate } from "react-router-dom";
-import '../css/AuthPage.css';
+import '../css/AuthPage.scss';
 import { FBUser } from '../../../utils/fb_user';
 const FirebaseLoginPage = () => {
   const [email, setEmail] = useState('');
@@ -23,10 +23,10 @@ const FirebaseLoginPage = () => {
     <div className="auth-container">
             <div className="auth-box">
                 <h2>Login</h2>
-                <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button onClick={handleLogin}>Login</button>
-                <p>Don't have an account? <a href="/firebase/register">Register here</a></p>
+                <input className="auth__input" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                <input  className="auth__input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+                <button  className="auth_button" onClick={handleLogin}>Login</button>
+                <p  className="auth__p">Don't have an account? <a  className="auth__a" href="/firebase/register">Register here</a></p>
                 {error && <div className="error-popup">{error}</div>}
             </div>
         </div>
