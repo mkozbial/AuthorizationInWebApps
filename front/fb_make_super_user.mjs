@@ -17,8 +17,6 @@ const firebaseConfig = {
     appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
-console.log(firebaseConfig);
-
 const app = firebase.initializeApp(firebaseConfig);
 
 const auth = app.auth();
@@ -33,8 +31,7 @@ usersCollection
             const docId = doc.id;
             const userData = doc.data();
             
-            // Update the document in Firestore
-            usersCollection.doc(docId).update({"accountType": "root"})
+            usersCollection.doc(docId).update({"accountType": "superuser"})
                 .then(() => {
                     console.log("Document updated successfully!");
                     process.exit(0);

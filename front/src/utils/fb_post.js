@@ -1,7 +1,8 @@
 export class FBPost {
-    constructor(postId, userId, title, text, dateAdded, visibility) {
+    constructor(postId, userId, userEmail, title, text, dateAdded, visibility) {
         this.postId = postId;
         this.userId = userId;
+        this.userEmail = userEmail;
         this.title = title;
         this.text = text;
         this.dateAdded = dateAdded;
@@ -10,6 +11,7 @@ export class FBPost {
     serialize() {
         return JSON.parse(JSON.stringify({
             userId: this.userId,
+            userEmail: this.userEmail,
             title: this.title,
             text: this.text,
             dateAdded: this.dateAdded,
@@ -18,7 +20,7 @@ export class FBPost {
     }
 
     static deserialize(postId, jsonString) {
-        const { userId, title, text, dateAdded, visibility } = JSON.parse(JSON.stringify(jsonString));
-        return new FBPost(postId, userId, title, text, new Date(dateAdded), visibility);
+        const { userId, userEmail, title, text, dateAdded, visibility } = JSON.parse(JSON.stringify(jsonString));
+        return new FBPost(postId, userId, userEmail, title, text, new Date(dateAdded), visibility);
     }
 }

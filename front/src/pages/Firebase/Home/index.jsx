@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import FBUserController, { FirebaseUserAccountType } from '../../../utils/fb_user_controller';
 import FirebaseUserHomepage from './User';
 import { useNavigate } from "react-router-dom";
-import FirebaseModeratorHomepage from './Moderator';
-import FirebaseRootHomepage from './Root';
+import FirebaseEditorHomepage from './Editor';
+import FirebaseSuperUserHomepage from './Superuser';
 
 function FirebaseHomepage() {
     const user = FBUserController.getInstance().user;
@@ -26,11 +26,11 @@ function FirebaseHomepage() {
                 {user.accountType === FirebaseUserAccountType.USER && (
                     <FirebaseUserHomepage />
                 )}
-                {user.accountType === FirebaseUserAccountType.MODERATOR && (
-                    <FirebaseModeratorHomepage />
+                {user.accountType === FirebaseUserAccountType.EDITOR && (
+                    <FirebaseEditorHomepage />
                 )}
-                {user.accountType === FirebaseUserAccountType.ROOT && (
-                    <FirebaseRootHomepage />
+                {user.accountType === FirebaseUserAccountType.SUPERUSER && (
+                    <FirebaseSuperUserHomepage />
                 )}
             </main>
         </div>

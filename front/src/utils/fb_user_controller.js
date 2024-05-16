@@ -7,8 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 export const FirebaseUserAccountType = {
   USER: 'user',
-  MODERATOR: 'moderator',
-  ROOT: 'root'
+  EDITOR: 'editor',
+  SUPERUSER: 'superuser'
 };
 
 class FBUserController {
@@ -72,9 +72,31 @@ class FBUserController {
     await this.auth.signOut();
   }
 
+  async updateUserRole(email, role) {
+    this.usersCollection
+    .where("email", "==", email)
+    .get()
+    .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+            const docId = doc.id;
+
+            this.usersCollection.doc(docId).update({"accountType": role})
+                .then(() => {
+                    console.log("Document updated successfully!");
+                })
+                .catch(error => {
+                    console.error("Error updating document: ", error);
+                });
+            });
+        })
+    .catch(error => {
+        console.error("Error getting documents: ", error);
+    });
+  }
+
   async getPosts() {
       try {
-        if (this.user.accountType == FirebaseUserAccountType.ROOT) {
+        if (this.user.accountType == FirebaseUserAccountType.SUPERUSER) {
           const snapshot = await this.postsCollection.where('visibility', 'in', ['public', 'private']).get();
           const postsData = snapshot.docs.map(doc => {
               const data = doc.data();
@@ -105,6 +127,7 @@ class FBUserController {
     try {
       await this.postsCollection.add({
         userId: this.user.uid,
+        userEmail: this.user.email,
         text: newPostContent,
         title: newPostTitle,
         visibility: newPostVisibility,
@@ -126,6 +149,7 @@ class FBUserController {
         console.error('Error updating post:', error);
     }
   } 
+  
   async removePost(post) {
     try {
       await this.postsCollection.doc(post.postId).delete();

@@ -41,5 +41,3 @@ Thumbs.db
 yarn.lock
 
 curl.py
-
-front/.env

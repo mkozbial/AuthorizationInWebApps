@@ -10,8 +10,8 @@ export default function Posts() {
     const fetchData = async () => {
         try {
             const postsData = await FBUserController.getInstance().getPosts();
-            console.log(postsData);
-            setPosts(postsData);
+            setPosts([...postsData]);
+            console.log("niher" + postsData);
         } catch (error) {
             console.error('Error fetching posts:', error);
         }
@@ -24,7 +24,6 @@ export default function Posts() {
     const handleEditPost = (post) => {
         setSelectedPost(post);
         console.log(post);
-        console.log(selectedPost);
         setEditModalOpen(true);
     };
 
@@ -33,9 +32,10 @@ export default function Posts() {
         fetchData();
     }
 
-    const handleEditModalClose = () => {
+    const handleEditModalClose = async () => {
         setEditModalOpen(false);
         fetchData();
+        console.log(posts);
     };
 
 
@@ -48,12 +48,12 @@ export default function Posts() {
                         <div key={post.postId} style={{ marginBottom: '10px', border: '1px solid #ccc', padding: '10px' }}>
                             <h3 style={{ marginBottom: '5px' }}>{post.title}</h3>
                             <p style={{ marginBottom: '5px', fontSize: '14px' }}>{post.text}</p>
-                            <p style={{ marginBottom: '5px', fontSize: '12px' }}>Added by User ID: {post.userId}</p>
+                            <p style={{ marginBottom: '5px', fontSize: '12px' }}>Added by user: {post.userEmail}</p>
                             <p style={{ marginBottom: '5px', fontSize: '12px' }}>Visibility: {post.visibility}</p>
-                            {(FBUserController.getInstance().user.accountType == FirebaseUserAccountType.ROOT || post.userId === FBUserController.getInstance().user.uid) && (
+                            {(FBUserController.getInstance().user.accountType == FirebaseUserAccountType.SUPERUSER || post.userId === FBUserController.getInstance().user.uid) && (
                                 <button onClick={() => handleEditPost(post)} style={{ padding: '5px 10px', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Edit</button>
                             )}
-                            {(FBUserController.getInstance().user.accountType == FirebaseUserAccountType.ROOT || FBUserController.getInstance().user.accountType == FirebaseUserAccountType.MODERATOR || post.userId === FBUserController.getInstance().user.uid) && (
+                            {(FBUserController.getInstance().user.accountType == FirebaseUserAccountType.SUPERUSER || FBUserController.getInstance().user.accountType == FirebaseUserAccountType.EDITOR || post.userId === FBUserController.getInstance().user.uid) && (
                                 <button onClick={() => handleRemovePost(post)} style={{ padding: '5px 10px', backgroundColor: '#DC143C', color: '#fff', border: 'none', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Remove</button>
                             )}
                         </div>

@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import Posts from '../../components/Posts';
 import SignOut from '../../components/SignOut';
 
-function FirebaseModeratorHomepage() {
+function FirebaseEditorHomepage() {
     return (
         <div style={{ fontFamily: 'Arial, sans-serif', maxWidth: '600px', margin: '0 auto' }}>
-            <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Hello Moderator!</h1>
+            <h1 style={{ textAlign: 'center', marginBottom: '20px' }}>Hello editor!</h1>
             <Posts />
             <SignOut />
         </div>
     );
 }
 
-export default FirebaseModeratorHomepage;
+export default FirebaseEditorHomepage;

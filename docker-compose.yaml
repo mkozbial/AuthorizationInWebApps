@@ -22,6 +22,8 @@ services:
       - "3001:3000"
     volumes:
       - ./front/src:/app/src
+    env_file:
+      - .env
     stdin_open: true
     tty: true
     networks:

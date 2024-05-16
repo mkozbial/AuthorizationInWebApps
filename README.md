@@ -146,7 +146,7 @@ node createsuperuser.js
 
 2. **Run following script**
 ```
-node --env-file=.\front\.env .\front\fb_make_root.mjs
+node --env-file=.\front\.env .\front\fb_make_super_user.mjs EMAIL
 ```
 
 

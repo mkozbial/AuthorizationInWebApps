@@ -7,7 +7,7 @@ function FirebaseUserHomepage() {
     const [newPostContent, setNewPostContent] = useState('');
     const [newPostTitle, setNewPostTitle] = useState('');
     const [newPostVisibility, setNewPostVisibility] = useState('public');
-    const [refreshKey, setRefreshKey] = useState(0); // State to force re-render
+    const [refreshKey, setRefreshKey] = useState(0);
 
     const handleNewPostSubmit = async () => {
         try {
