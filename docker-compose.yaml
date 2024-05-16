@@ -31,9 +31,9 @@ services:
     container_name: database
     restart: always
     environment:
-      POSTGRES_DB: auth_database
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: WoPn4ss14Intel!#
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./database-configuration.sql:/docker-entrypoint-initdb.d/database-configuration.sql
     ports:
