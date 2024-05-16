@@ -28,13 +28,13 @@ const App = () => {
           if (userDoc.exists) {
             const serializedUser = userDoc.data();
             FBUserController.getInstance().user = FBUser.deserialize(user.uid, serializedUser);
-            if (location.pathname.startsWith('/firebase/')) {
+            if (location.pathname.startsWith('/firebase')) {
               navigate('/firebase/main/');
             }
           } 
         } else {
           console.log("User is signed out");
-          if (location.pathname != "/firebase/login/" && location.pathname != "/firebase/register") {
+          if (location.pathname != "/firebase/login/" && location.pathname != "/firebase/register" && location.pathname.startsWith('/firebase')) {
             navigate('/firebase/login/');
           }
         }

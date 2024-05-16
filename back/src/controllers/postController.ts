@@ -45,10 +45,11 @@ export const uploadPost = async(req: Request, res: Response) => {
 export const deletePost = async (req: Request, res: Response) => {
     const postId = parseInt(req.body.post_id, 10);
     const userId = req.body.user.userId;
+    const user = await userService.getUserById(userId);
     try {
         const post = await postService.getPostById(postId);
     
-        if (!post || post.user_id !== userId) {
+        if ((!post || post.user_id !== userId)&& !canEdit(user)) {
             return res.status(StatusCodes.FORBIDDEN).json({ message: 'You are not allowed to delete this post' });
         }
     
@@ -70,7 +71,6 @@ export const editPost = async (req: Request, res: Response) => {
     try {
         const user = await userService.getUserById(userId);
         const post = await postService.getPostById(postId);
-        console.log(canEdit(user))
     
         if ((!post || post.user_id !== userId) && !canEdit(user)) {
           return res.status(StatusCodes.FORBIDDEN).json({ message: 'You are not allowed to edit this post' });
