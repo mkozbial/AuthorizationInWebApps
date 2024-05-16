@@ -1,0 +1,14 @@
+.sign-out-btn {
+    background-color: #f44336; /* Red background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    font-size: 16px; /* Font size */
+    border: none; /* No border */
+    cursor: pointer; /* Cursor style */
+    border-radius: 5px; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition on hover */
+  }
+  
+  .sign-out-btn:hover {
+    background-color: #d32f2f; /* Darker red on hover */
+  }
