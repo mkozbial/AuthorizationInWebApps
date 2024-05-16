@@ -63,7 +63,7 @@ const AdminPage: React.FC = () => {
         const url = `http://localhost:8080/admin/users/${userID}`;
     
         return fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

@@ -131,7 +131,6 @@ const MainPage: React.FC = () => {
         const url = 'http://localhost:8080/posts/delete';
         const token = localStorage.getItem("accessToken");
 
-
         return fetch(url, {
             method: 'DELETE',
             headers: {
@@ -179,7 +178,6 @@ const MainPage: React.FC = () => {
     const handleCheckboxChange = () => {
         setIsChecked(!isChecked); 
     };
-    
     return (
         <Dialog.Root>
             <div className="main-page">
@@ -255,7 +253,7 @@ const MainPage: React.FC = () => {
                                         <Dialog.Trigger asChild>
                                             <Pen className="posts-list__icon" onClick={() => { setSelectedPost(post.post_id); }} />
                                         </Dialog.Trigger>
-                                        <Trash className="posts-list__icon" onClick={() => { setSelectedPost(post.post_id); deletePost(selectedPost);  }} />
+                                        <Trash className="posts-list__icon" onClick={() => { setSelectedPost(post.post_id); deletePost(post.post_id);  }} />
                                     </>
                                 }
                             </div>

@@ -25,7 +25,7 @@ const FirebaseLoginPage = () => {
                 <h2>Login</h2>
                 <input className="auth__input" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                 <input  className="auth__input" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <button  className="auth_button" onClick={handleLogin}>Login</button>
+                <button  className="auth__button" onClick={handleLogin}>Login</button>
                 <p  className="auth__p">Don't have an account? <a  className="auth__a" href="/firebase/register">Register here</a></p>
                 {error && <div className="error-popup">{error}</div>}
             </div>
