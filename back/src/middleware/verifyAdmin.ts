@@ -33,7 +33,6 @@ export const verifyAdmin= (req: Request, res: Response, next: NextFunction) => {
                   return res.status(StatusCodes.UNAUTHORIZED).json({ message: 'Given user is not an admin' });
             }
 
-            console.log("elo");
             req.body.user = decoded;
             next();
       });
