@@ -40,6 +40,8 @@ services:
       - ./database-configuration.sql:/docker-entrypoint-initdb.d/database-configuration.sql
     ports:
       - "5432:5432"
+    env_file:
+      - .env
     networks:
       - mynetwork
 networks:
